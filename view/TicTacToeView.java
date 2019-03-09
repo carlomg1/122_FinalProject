@@ -1,4 +1,4 @@
-package View;
+package view;
 
 public class TicTacToeView implements GameView {
 	public String Player1;
