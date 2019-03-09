@@ -8,16 +8,19 @@ public class OthelloLogic implements GameLogic {
 	
 	@Override
 	public String getButtonClicked(){
+		return turn;
 		
 	}
 	
 	
 	@Override
 	public boolean checkValidMove (JButton button){
+		return false;
 		
 	}
 	
 	public boolean findWinner(){
+		return false;
 		
 	}
 	public void changeTurn(){

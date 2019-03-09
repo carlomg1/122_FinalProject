@@ -8,20 +8,24 @@ public class MemoryLogic implements GameLogic {
 	
 	@Override
 	public String getButtonClicked(){
+		return null;
 		
 	}
 	
 	
 	@Override
 	public boolean checkValidMove (JButton button){
+		return false;
 		
 	}
 	
 	public boolean checkFinish(){
+		return false;
 		
 	}
 	
 	public boolean onRonudCheck(){
+		return false;
 		
 	}
 
