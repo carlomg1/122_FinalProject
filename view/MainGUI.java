@@ -1,4 +1,4 @@
-package View;
+package view;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -14,7 +14,7 @@ public class MainGUI extends JFrame {
 		
 		//Create buttons for each game
 		JButton checkersButton = addGameButton("Checkers", 70, new CheckersView());
-		JButton memoryButton = addGameButton("Memory", 150, new MemoryView());
+		JButton memoryButton = addGameButton("Memory", 150, new MemoryView("FILLER", "FILLER"));
 		JButton othelloButton = addGameButton("Othello", 230, new OthelloView());
 		JButton tictactoeButton = addGameButton("TicTacToe", 310, new TicTacToeView());
 		
@@ -67,7 +67,7 @@ public class MainGUI extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				selectGame(gameview);
-				System.exit(0);
+				//System.exit(0);
 			}
 	       });
 	       return checkersButton;
