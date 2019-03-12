@@ -5,7 +5,11 @@ import javax.swing.*;
 import view.MainGUI;
 
 public class OthelloLogic implements GameLogic {
-	OthelloGameState othelloGameState = new OthelloGameState();
+	public OthelloGameState othelloGameState = new OthelloGameState();
+	
+	public OthelloLogic() {
+		initializeBoard();
+	}
 	
 	@Override
 	public boolean checkValidMove (JButton button){
