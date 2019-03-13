@@ -28,24 +28,13 @@ public class TicTacToeView implements GameView {
 	@Override
 	public void startGame() {
 		this.layoutGrid();
-		
-
-
 	}
-
-
-	
 
 	@Override
 	public void layoutGrid() {
 		this.frame = new JFrame ("Tic Tac Toe");
 		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-
-		
 		this.updateBoard();
-
-		
 	}
 	
 	@Override
@@ -62,7 +51,6 @@ public class TicTacToeView implements GameView {
 		this.frame.setVisible(true);
 		this.frame.setSize(500, 500);
 
-		
 		
 	}
 	

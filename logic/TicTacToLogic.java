@@ -58,10 +58,22 @@ public class TicTacToLogic implements GameLogic {
 	                
 	                if(answer==JOptionPane.YES_OPTION) { // if the user want to play again clear all the button and start over
 	                	resetButtons();
+	                	
 				}
 	                //resetButtons(); do i need to reset after here?
-	            }   
-	            counterSwitchPlayer++;
+	            }
+	    		else if (counterSwitchPlayer==9 && (checkDiagonalWin()  == false || checkVerticalWin()==false || checkHorizontalWin()==false )) {
+					int answer1=JOptionPane.showConfirmDialog(null, "It is a tie!  Do you want to play again?","",JOptionPane.YES_NO_OPTION);
+			        if(answer1==JOptionPane.NO_OPTION){
+	    				System.exit(0);
+	    				}
+	                
+	                if(answer1==JOptionPane.YES_OPTION) { // if the user want to play again clear all the button and start over
+	                	resetButtons();
+	                	
+				}
+
+	    		}
 	            return turn;
 	    	}
 	        
@@ -69,14 +81,16 @@ public class TicTacToLogic implements GameLogic {
 	        
 	        public void changeTurn(ActionEvent buttonPress) {
 	        	JButton buttonClicked=(JButton)buttonPress.getSource();
-	        	if (counterSwitchPlayer %2==0) {
+	        	if (counterSwitchPlayer %2==0  && getText().equals("")) {
 	        		buttonClicked.setText("X");
 	        		turn="Player 1";
+	        		counterSwitchPlayer++;
 	        	}
 	        	
-	        	else {
+	        	else if(counterSwitchPlayer %2==1 && getText().equals("")) {
 	        		buttonClicked.setText("O");
 	        		turn="Player 2";
+	        		counterSwitchPlayer++;
 	        		}
 	        }
 	        
@@ -117,7 +131,6 @@ public class TicTacToLogic implements GameLogic {
 	        public boolean findWinner(int row,int column)
 	        {
 	            if (tictacview.buttons[row].getText().equals(tictacview.buttons[column].getText()) && !tictacview.buttons[row].getText().equals("")) {
-	            	System.out.println("ROW HERE"+ tictacview.buttons[row].getText());
 	                return true;
 	            }
 	            else
@@ -133,39 +146,25 @@ public class TicTacToLogic implements GameLogic {
         {
         	tictacview.buttons[i].setText("");
         }
+        counterSwitchPlayer=0;
+        
     }
 
 
-	public void initializeBoard() {
-		
-//		JFrame frame = new JFrame ("Tic Tac Toe");
-//		frame.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
-//
-//		JPanel panel = new JPanel(); //creating a panel with a box like a tic tac toe board
-//		panel.setLayout (new GridLayout (TicTacToGameState.rows, TicTacToGameState.columns));	
-//		for(int i=0; i<=numberButtons-1; i++){ //placing the button onto the board
-//			buttons[i] = new buttonListener();
-//			panel.add(buttons[i]);		 
-//		}
-//		
-//		frame.getContentPane().add (panel);
-//		frame.pack();
-//		frame.setVisible(true);
-//		frame.setSize(500, 500);
 
-
-	}
-//    public static void main (String[] args) 
-//    {
-//    	TicTacToLogic tictactologic=new TicTacToLogic();
-//    	tictactologic.initializeBoard();
-//    }
 
 	@Override 
 	public boolean checkValidMove(JButton button) {
 		buttonListener here=new buttonListener();
 	
 		return false;
+	}
+
+
+	@Override
+	public String getButtonClicked() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
