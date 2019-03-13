@@ -12,7 +12,7 @@ public class TicTacToGameState{
 	int counterSwitchPlayer=0;
 	public static int rows=3;
 	public static int columns =3;
-//	public int[] [] board=new int [3][3];
+
 			
 	public void update(){}
 	public void changeTurn(){}
