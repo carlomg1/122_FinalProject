@@ -4,6 +4,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+
 import javax.swing.*;
 import view.MemoryButtonListener;
 
@@ -13,12 +14,6 @@ public class MemoryLogic implements GameLogic {
 	private static int completeCount;
 	public static MemoryButtonListener previousButton = null;
 	
-	
-	@Override
-	public String getButtonClicked(){
-		return null;
-		
-	}
 	
 	
 	@Override

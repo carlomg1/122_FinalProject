@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 
+
 public class MemoryView implements GameView {
 	private static final int BOARD_ROWS = 4;
 	private static final int BOARD_COLS = 4;
