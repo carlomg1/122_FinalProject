@@ -1,5 +1,8 @@
 package View;
 
+
+import java.util.ArrayList;
+
 import java.awt.*;  
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicButtonListener;
@@ -11,14 +14,17 @@ public class CheckersView implements GameView {
 	public Board boardGame;
 	public JFrame frame;
 	public JPanel panel;
-	public Button[][] buttons;
+	public JButton[][] buttons;
 	public CheckersGameState GameState;
 	
 	public CheckersView() {
 		GameState = new CheckersGameState();
-		this.buttons = new Button[8][];
+		this.buttons = new JButton[8][];
 		for (int i = 0; i<8; ++i){
-			this.buttons[i]=new Button[8];
+			this.buttons[i]=new JButton[8];
+			for(int j = 0; j<8; ++j){
+				buttons[i][j] = null;
+			}
 		}
 		this.startGame();
 	}
@@ -27,6 +33,12 @@ public class CheckersView implements GameView {
 	public void startGame() {
 		// TODO Auto-generated method stub
 		this.layoutGrid();
+		/*ArrayList<int[]> testmove= new ArrayList<int[]>();
+		int[] move1 = new int[]{3,2};
+		testmove.add(move1);
+		
+		this.drawValidMove(testmove);*/ 
+		//test for draw valid move
 		
 	}
 
@@ -73,6 +85,7 @@ public class CheckersView implements GameView {
 					button.setForeground(Color.gray);
 					button.setOpaque(true);
 					button.setBorder(BorderFactory.createLineBorder(Color.gray));
+					buttons[i][j] = button;
 					this.panel.add(button);
 					black = false;
 				}
@@ -82,6 +95,7 @@ public class CheckersView implements GameView {
 					button.setForeground(Color.gray);
 					button.setOpaque(true);
 					button.setBorder(BorderFactory.createLineBorder(Color.gray));
+					buttons[i][j] = button;
 					this.panel.add(button);
 					black = false;
 				}
@@ -93,6 +107,7 @@ public class CheckersView implements GameView {
 						button.setForeground(Color.gray);
 						button.setOpaque(true);
 						button.setBorder(BorderFactory.createLineBorder(Color.gray));
+						buttons[i][j] = button;
 						this.panel.add(button);
 						black = false;
 					}else{
@@ -104,6 +119,38 @@ public class CheckersView implements GameView {
 						this.panel.add(label);
 						black = true;
 					}
+				}
+			}
+		}
+	}
+	
+	public void drawValidMove(ArrayList<int[]> validMoves){
+		
+		for (int[] move : validMoves){
+			if (move.length == 2){
+				final JButton button = new JButton( new ValidMoveIcon());
+				button.setBackground(Color.darkGray);
+				button.setForeground(Color.darkGray);
+				button.setOpaque(true);
+				button.setBorder(BorderFactory.createLineBorder(Color.darkGray));
+				buttons[move[0]][move[1]] = button;
+			}
+		}
+		this.panel.removeAll();
+		this.panel.revalidate();
+		this.panel.repaint();
+		
+		for(int i=0; i<8; i++){ 
+			for (int j =0; j<8; ++j){
+				if (buttons[i][j]!=null){
+					this.panel.add(buttons[i][j]);
+				}else{
+					final JLabel label = new JLabel();
+					label.setBackground(Color.white);
+					label.setForeground(Color.white);
+					label.setOpaque(true);
+					label.setBorder(BorderFactory.createLineBorder(Color.gray));
+					this.panel.add(label);
 				}
 			}
 		}
@@ -146,6 +193,28 @@ public class CheckersView implements GameView {
 		    //or
 		    //g2.translate(x, y);
 		    //g2.drawOval(0, 0, getIconWidth() - 1, getIconHeight() - 1);
+		    g2.dispose();
+		  }
+
+		  @Override
+		  public int getIconWidth() {
+		    return 30;
+		  }
+		  @Override
+		  public int getIconHeight() {
+		    return 30;
+		  }
+		}
+	
+	class ValidMoveIcon implements Icon {
+		  @Override
+		  public void paintIcon(Component c, Graphics g, int x, int y) {
+		    //g.drawOval(10, 10, 20, 20);
+		    Graphics2D g2 = (Graphics2D) g.create();
+		    //Draw the icon at the specified x, y location:
+		    g2.drawOval(1, 1, c.getWidth()-3, c.getHeight()-3);
+		    g2.setColor(Color.white);
+		    g2.fillOval(8, 8, c.getWidth()-16, c.getHeight()-16);
 		    g2.dispose();
 		  }
 
