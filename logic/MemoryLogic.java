@@ -1,11 +1,17 @@
 package logic;
 
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.*;
+import view.MemoryButtonListener;
 
 public class MemoryLogic implements GameLogic {
 	private static final int MEMORY_BOARD_ROWS = 4;
 	private static final int MEMORY_BOARD_COLS = 4;
 	private static int completeCount;
+
 	
 	
 	@Override
@@ -17,7 +23,8 @@ public class MemoryLogic implements GameLogic {
 	
 	@Override
 	public boolean checkValidMove (JButton button){
-		return false;
+		MemoryButtonListener temp = (MemoryButtonListener)button;
+		return temp.revealed;
 		
 	}
 	

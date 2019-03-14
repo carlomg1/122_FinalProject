@@ -1,5 +1,6 @@
 package view;
 import logic.MemoryGameState;
+import logic.MemoryLogic;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -17,7 +18,7 @@ public class MemoryButtonListener extends JButton implements ActionListener
 	 private int value;			//The hidden value this Button contains 
 	 private int row;			//Row index its located in
 	 private int column;		//Col index its located in
-	 private boolean revealed;	//Whether this space has been revealed or not
+	 public boolean revealed;	//Whether this space has been revealed or not
  
 	 public MemoryButtonListener(int x, int y, int numValue) {
 		 addActionListener(this); // allows button to be clickable and start performing the actions on it
@@ -32,7 +33,14 @@ public class MemoryButtonListener extends JButton implements ActionListener
 	 
 	    public void actionPerformed(ActionEvent action) 
 	    {
-	    	System.out.println("Row: " + row + " ;Column: " + column + "; Value: " + value);
+	    	MemoryLogic rules = new MemoryLogic();
+	    	// Valid move, user clicked on a button that has not been revealed yet
+	    	if(rules.checkValidMove(this)) {
+	    		System.out.println("HERE!");
+	    		revealed = true;
+	    	}
+
+	    	
 	    }
 	    
     

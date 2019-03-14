@@ -1,5 +1,6 @@
 package view;
 import logic.MemoryGameState;
+import logic.MemoryLogic;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
