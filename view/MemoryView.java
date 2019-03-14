@@ -18,7 +18,7 @@ import javax.swing.Timer;
 public class MemoryView implements GameView {
 	private static final int BOARD_ROWS = 4;
 	private static final int BOARD_COLS = 4;
-	private static JButton buttons[][] = new JButton[BOARD_ROWS][BOARD_COLS];
+	private static MemoryButtonListener buttons[][] = new MemoryButtonListener[BOARD_ROWS][BOARD_COLS];
 	private String player1;
 	private String player2;
 	private Board boardGame;
@@ -34,6 +34,22 @@ public class MemoryView implements GameView {
 
 	@Override
 	public void startGame() {
+		// TODO Auto-generated method stub
+		this.layoutGrid();
+	}
+
+	public static void RevealSpace(int row, int col) {
+		buttons[row][col].revealed = true;
+		buttons[row][col].setText(Integer.toString(buttons[row][col].GetValue()));
+	}
+	
+	public static void HideSpace(int row, int col) {
+		buttons[row][col].revealed = false;
+		buttons[row][col].setText("");
+	}
+	
+	@Override
+	public void layoutGrid() {
 		// TODO Auto-generated method stub
 		JFrame frame = new JFrame("Memory Match");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -65,12 +81,6 @@ public class MemoryView implements GameView {
 		});
 		timer.setRepeats(false);
 		timer.start();
-		
-	}
-
-	@Override
-	public void layoutGrid() {
-		// TODO Auto-generated method stub
 		
 	}
 

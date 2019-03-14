@@ -20,7 +20,7 @@ public class MainGUI extends JFrame {
 		
 		//Create buttons for each game
 		JButton checkersButton = addGameButton("Checkers", 70, new CheckersView());
-		JButton memoryButton = addGameButton("Memory", 150, new MemoryView());
+		JButton memoryButton = addGameButton("Memory", 150, new MemoryView("1", "2"));
 		JButton othelloButton = addGameButton("Othello", 230, new OthelloView());
 		JButton tictactoeButton = addGameButton("TicTacToe", 310, new TicTacToeView());
 		

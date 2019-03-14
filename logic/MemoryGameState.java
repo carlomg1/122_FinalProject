@@ -25,7 +25,6 @@ public class MemoryGameState{
 	//Stores pairs of random numbers within these spaces
 	private int[][] hiddenNumbers;
 	
-	
 	public MemoryGameState(String p1, String p2) {
 		possibleNums = new HashMap<Integer, Integer>();
 		player1 = p1;

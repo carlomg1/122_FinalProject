@@ -31,17 +31,37 @@ public class MemoryButtonListener extends JButton implements ActionListener
 		 this.setEnabled(false);
 	 	}
 	 
-	    public void actionPerformed(ActionEvent action) 
+    public void actionPerformed(ActionEvent action) 
 	    {
 	    	MemoryLogic rules = new MemoryLogic();
 	    	// Valid move, user clicked on a button that has not been revealed yet
-	    	if(rules.checkValidMove(this)) {
-	    		System.out.println("HERE!");
-	    		revealed = true;
+	    	if(rules.checkValidMove(this)) {	    		
+	    		
+	    		//One button pressed, reveal it
+	    		if(MemoryLogic.previousButton == null) {
+	    			MemoryView.RevealSpace(row, column);
+	    			MemoryLogic.previousButton = this;
+	    			
+	    			
+	    		}
+	    		//2nd button pressed, check if its a match
+	    		else {
+	    			MemoryLogic.previousButton = null;
+	    			MemoryView.RevealSpace(row, column);
+	    			
+	    			
+	    		}
+	    		
+	    		//Check if the game is over
+	    		
+	    		
 	    	}
-
+	    		
 	    	
 	    }
 	    
+    public int GetValue() {
+    	return value;
+    }
     
 }
