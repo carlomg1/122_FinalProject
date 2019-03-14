@@ -80,7 +80,7 @@ public class CheckersView implements GameView {
 				black = true;
 			}
 			for (int j =0; j<8; ++j){ 
-				if (GameState.playerOneCurrentState[i][j]==1){
+				if (GameState.playerOneCurrentState[i][j] != null){
 					final JButton button = new JButton(new CircleIconBlack());
 					button.setBackground(Color.gray);
 					button.setForeground(Color.gray);
@@ -90,7 +90,7 @@ public class CheckersView implements GameView {
 					this.panel.add(button);
 					black = false;
 				}
-				else if (GameState.playerTwoCurrentState[i][j]==1){
+				else if (GameState.playerTwoCurrentState[i][j] != null){
 					final JButton button = new JButton(new CircleIconRed());
 					button.setBackground(Color.gray);
 					button.setForeground(Color.gray);
