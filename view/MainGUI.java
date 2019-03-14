@@ -8,10 +8,6 @@ public class MainGUI extends JFrame {
 
 
 	public MainGUI() {
-
-
-
-
 		//Set JPanel
 		JPanel panel = new JPanel();
 		getContentPane().add(panel);
@@ -125,7 +121,7 @@ public class MainGUI extends JFrame {
 		//p.add();
 
 		buttonListener12.f.add(p);
-		buttonListener12.f.setSize(300, 400);
+		buttonListener12.f.setSize(400, 400);
 
 		buttonListener12.f.show();
 

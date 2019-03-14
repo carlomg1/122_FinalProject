@@ -38,10 +38,5 @@ public class OthelloLogic implements GameLogic {
 			}
 		}
 	}
-	
-	public static void main (String[] args) {
-		OthelloLogic othelloLogic = new OthelloLogic();
-		othelloLogic.initializeBoard();
-	}
 
 }

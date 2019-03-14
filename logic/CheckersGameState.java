@@ -6,8 +6,8 @@ public class CheckersGameState{
 	
 	private String playerTurn;
 	private int score;
-	private int[][] playerOneCurrentState;
-	private int[][] playerTwoCurrentState;
+	public int[][] playerOneCurrentState;
+	public int[][] playerTwoCurrentState;
 	
 	public CheckersGameState(){
 		this.score = 0;

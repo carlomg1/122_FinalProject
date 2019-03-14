@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.awt.*;  
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicButtonListener;
-import Logic.CheckersGameState;
+import logic.CheckersGameState;
 
 
 public class CheckersView implements GameView {
@@ -27,7 +27,7 @@ public class CheckersView implements GameView {
 				buttons[i][j] = null;
 			}
 		}
-		this.startGame();
+		//this.startGame();
 	}
 
 	@Override

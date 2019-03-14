@@ -160,11 +160,4 @@ public class TicTacToLogic implements GameLogic {
 		return false;
 	}
 
-
-	@Override
-	public String getButtonClicked() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }
