@@ -138,6 +138,7 @@ public class OthelloView implements GameView {
 		    g2.dispose();
 		  }
 
+
 		  @Override
 		  public int getIconWidth() {
 		    return 30;
@@ -173,3 +174,4 @@ public class OthelloView implements GameView {
 		  }
 		}
 }
+

@@ -8,6 +8,7 @@ import javax.swing.*;
 import javax.swing.plaf.basic.BasicButtonListener;
 import Logic.CheckersGameState;
 
+
 public class CheckersView implements GameView {
 	public String Player1;
 	public String Player2;
