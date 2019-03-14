@@ -6,12 +6,6 @@ public class CheckersLogic implements GameLogic {
 	
 	private String turn;
 	
-	@Override
-	public String getButtonClicked(){
-		return turn;
-		
-	}
-	
 	
 	@Override
 	public boolean checkValidMove (JButton button){
