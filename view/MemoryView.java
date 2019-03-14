@@ -1,4 +1,4 @@
-package View;
+package view;
 
 public class MemoryView implements GameView {
 	public String Player1;

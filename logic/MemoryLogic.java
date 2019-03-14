@@ -1,16 +1,10 @@
-package Logic;
+package logic;
 
 import javax.swing.*;
 
 public class MemoryLogic implements GameLogic {
 	
 	private int CompleteCount;
-	
-	@Override
-	public String getButtonClicked(){
-		return null;
-		
-	}
 	
 	
 	@Override

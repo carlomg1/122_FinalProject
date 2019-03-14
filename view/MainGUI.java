@@ -5,31 +5,31 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 public class MainGUI extends JFrame {
-	
-	
+
+
 	public MainGUI() {
-		
-		
-		
-		
+
+
+
+
 		//Set JPanel
 		JPanel panel = new JPanel();
 		getContentPane().add(panel);
 		panel.setLayout(null);
-		
+
 		//Create buttons for each game
 		JButton checkersButton = addGameButton("Checkers", 70, new CheckersView());
 		JButton memoryButton = addGameButton("Memory", 150, new MemoryView());
 		JButton othelloButton = addGameButton("Othello", 230, new OthelloView());
 		JButton tictactoeButton = addGameButton("TicTacToe", 310, new TicTacToeView());
-		
+
 		//Add buttons to panel
 		panel.add(checkersButton);
 		panel.add(memoryButton);
 		panel.add(othelloButton);
 		panel.add(tictactoeButton);
-		
-		
+
+
 		//Initialize environment
 		setTitle("Game Environment");
 		setSize(500,500);
@@ -51,7 +51,7 @@ public class MainGUI extends JFrame {
 	public void selectGame(GameView gameView){
 		gameView.startGame();
 	}
-	
+
 	/**
 	 * Creates a new instance of MainGUI and runs it.
 	 * Was not sure if the main should actually be in a login
@@ -66,44 +66,44 @@ public class MainGUI extends JFrame {
 //		MainGUI main = new MainGUI();
 //		main.setVisible(true);
 	}
-	
-	
-	
+
+
+
 	public static class buttonListener12 extends JButton implements ActionListener{
-		  static JLabel l; 
+		  static JLabel l;
 		  static JLabel l1;
-		  static JTextField t; 
+		  static JTextField t;
 		  static JTextField t1;
-		  
-		    // JFrame 
-		    static JFrame f; 
-		  
-		    // JButton 
-		    static JButton b; 
-		  
+
+		    // JFrame
+		    static JFrame f;
+
+		    // JButton
+		    static JButton b;
+
 		buttonListener12(){
-			
+
 		}
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			 String s = e.getActionCommand(); 
-		        if (s.equals("submit")) { 
+			 String s = e.getActionCommand();
+		        if (s.equals("submit")) {
 		        	MainGUI main = new MainGUI();
 		    		main.setVisible(true);
-		    		
-//		            // set the text of the label to the text of the field 
-//		            l.setText( buttonListener12.t.getText()); 
-//		  
-//		            // set the text of field to blank 
-//		            buttonListener12.t.setText("  "); 
+
+//		            // set the text of the label to the text of the field
+//		            l.setText( buttonListener12.t.getText());
+//
+//		            // set the text of field to blank
+//		            buttonListener12.t.setText("  ");
 //			// TODO Auto-generated method stub
-//			
+//
 		}
 	}
 
 	public static void method() {
-		
+
 		buttonListener12.f=new JFrame("Text");
 		buttonListener12.l=new JLabel("Player 1 Username:");
 		buttonListener12.l1=new JLabel("Player 2 Username:");
@@ -123,23 +123,23 @@ public class MainGUI extends JFrame {
 		//p.add(label1);
 		//p.add(buttonListener12.l);
 		//p.add();
-		
+
 		buttonListener12.f.add(p);
-		buttonListener12.f.setSize(300, 400); 
-		  
+		buttonListener12.f.setSize(300, 400);
+
 		buttonListener12.f.show();
 
        // return text.getText();
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @param gameView
 	 */
 
-	
+
 	/**
-	 * Creates a button and attaches an event listener. The 
+	 * Creates a button and attaches an event listener. The
 	 * event listener should fire the game, but for now, only
 	 * quits.
 	 * @param game specifies the game text the button should have
@@ -149,4 +149,3 @@ public class MainGUI extends JFrame {
 
 	}
 }
-
