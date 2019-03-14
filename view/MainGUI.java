@@ -1,3 +1,4 @@
+
 package view;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,10 +13,10 @@ public class MainGUI extends JFrame {
 		JPanel panel = new JPanel();
 		getContentPane().add(panel);
 		panel.setLayout(null);
-
+		
 		//Create buttons for each game
 		JButton checkersButton = addGameButton("Checkers", 70, new CheckersView());
-		JButton memoryButton = addGameButton("Memory", 150, new MemoryView());
+		JButton memoryButton = addGameButton("Memory", 150, new MemoryView("1", "2"));
 		JButton othelloButton = addGameButton("Othello", 230, new OthelloView());
 		JButton tictactoeButton = addGameButton("TicTacToe", 310, new TicTacToeView());
 
@@ -24,8 +25,6 @@ public class MainGUI extends JFrame {
 		panel.add(memoryButton);
 		panel.add(othelloButton);
 		panel.add(tictactoeButton);
-
-
 		//Initialize environment
 		setTitle("Game Environment");
 		setSize(500,500);
@@ -47,7 +46,7 @@ public class MainGUI extends JFrame {
 	public void selectGame(GameView gameView){
 		gameView.startGame();
 	}
-
+  
 	/**
 	 * Creates a new instance of MainGUI and runs it.
 	 * Was not sure if the main should actually be in a login
@@ -62,40 +61,40 @@ public class MainGUI extends JFrame {
 //		MainGUI main = new MainGUI();
 //		main.setVisible(true);
 	}
-
-
-
+	
+	
+	
 	public static class buttonListener12 extends JButton implements ActionListener{
-		  static JLabel l;
+		  static JLabel l; 
 		  static JLabel l1;
-		  static JTextField t;
+		  static JTextField t; 
 		  static JTextField t1;
-
-		    // JFrame
-		    static JFrame f;
-
-		    // JButton
-		    static JButton b;
-
+		  
+		    // JFrame 
+		    static JFrame f; 
+		  
+		    // JButton 
+		    static JButton b; 
+		  
 		buttonListener12(){
+			
 
 		}
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			 String s = e.getActionCommand();
-		        if (s.equals("submit")) {
+			 String s = e.getActionCommand(); 
+		        if (s.equals("submit")) { 
 		        	MainGUI main = new MainGUI();
 		    		main.setVisible(true);
-
-//		            // set the text of the label to the text of the field
-//		            l.setText( buttonListener12.t.getText());
-//
-//		            // set the text of field to blank
-//		            buttonListener12.t.setText("  ");
+		    		
+//		            // set the text of the label to the text of the field 
+//		            l.setText( buttonListener12.t.getText()); 
+//		  
+//		            // set the text of field to blank 
+//		            buttonListener12.t.setText("  "); 
 //			// TODO Auto-generated method stub
-//
-		}
+//	
 	}
 
 	public static void method() {
@@ -145,3 +144,4 @@ public class MainGUI extends JFrame {
 
 	}
 }
+

@@ -1,3 +1,4 @@
+
 package view;
 
 import java.awt.GridLayout;
@@ -36,7 +37,6 @@ public class TicTacToeView implements GameView {
 		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.updateBoard();
 	}
-
 	@Override
 	public void updateBoard() {
 		this.panel=new JPanel();
@@ -51,14 +51,12 @@ public class TicTacToeView implements GameView {
 		this.frame.setVisible(true);
 		this.frame.setSize(500, 500);
 
-
-	}
-
 	@Override
 	public void populateStartGrid() {
 
 		// TODO Auto-generated method stub
 		//maybe dont need thisp
 	}
+
 
 }
