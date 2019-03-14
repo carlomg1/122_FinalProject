@@ -27,8 +27,15 @@ public class MemoryLogic implements GameLogic {
 		return numbers[turnRow1][turnCol1] == numbers[turnRow2][turnCol2];
 	}
 	
-	public boolean checkFinish(){
-		return false;
+	public boolean checkFinish(boolean[][] revealed){
+		for(int x = 0; x < MEMORY_BOARD_ROWS; x++) {
+			for(int y = 0; y < MEMORY_BOARD_COLS; y++) {
+				if(!revealed[x][y]) {
+					return false;
+				}
+			}
+		}
+		return true;
 		
 	}
 	

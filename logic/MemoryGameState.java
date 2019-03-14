@@ -43,6 +43,10 @@ public class MemoryGameState{
 		
 	}
 	
+	public int GetValue(int x, int y) {
+		return hiddenNumbers[x][y];
+	}
+	
 	public void update(){}
 	
 	public void changeTurn(){
@@ -84,9 +88,9 @@ public class MemoryGameState{
 	
 	
 	//EX: (4 * 4 / 2) + 1 = 9
-	//The board will have 16 spaces with each space containing a number between 1-9
-	//There will exist a pair for each number from 1-9
+	//The board will have 16 spaces with each space containing a number between 1-8
+	//There will exist a pair for each number from 1-8
 	private int GetUpperBound() {
-		return (BOARD_ROWS * BOARD_COLS / 2) + 1;
+		return (BOARD_ROWS * BOARD_COLS) / 2;
 	}
 }

@@ -1,6 +1,7 @@
 package view;
 import logic.MemoryGameState;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
 
 public class MemoryView implements GameView {
@@ -20,22 +22,7 @@ public class MemoryView implements GameView {
 	private String player2;
 	private Board boardGame;
 	MemoryGameState currentState;
-	
-	 private class ButtonListener extends JButton implements ActionListener
-	    {
-		 
-		 public ButtonListener() {
-			 addActionListener(this);// allows button to be clickable and start performing the actions on it
-		 	}
-		 
-	        public void actionPerformed(ActionEvent action) 
-	        {
-	        	System.out.println("Button pressed");
-	        }
-	        
-	        
-}
-	
+
 	
 	
 	public MemoryView(String p1, String p2) {
@@ -54,7 +41,7 @@ public class MemoryView implements GameView {
 		panel.setLayout(new GridLayout(BOARD_ROWS, BOARD_COLS ));
 		for(int x = 0; x < BOARD_ROWS; x++) {
 			for(int y = 0; y < BOARD_COLS; y++) {
-				buttons[x][y] = new ButtonListener();
+				buttons[x][y] = new MemoryButtonListener(x, y, currentState.GetValue(x, y));
 				panel.add(buttons[x][y]);
 			}
 		}
@@ -62,7 +49,22 @@ public class MemoryView implements GameView {
 		frame.getContentPane().add(panel);
 		frame.pack();
 		frame.setVisible(true);
-		frame.setSize(800, 800);
+		frame.setSize(1280, 720);
+		
+		//CREATE A TIMER SO THAT ALL NUMS ARE SET TO BE HIDDEN AFTER SOME TIME AFTER STARTUP
+		Timer timer = new Timer(5000, new ActionListener() {
+			public void actionPerformed(ActionEvent event) {
+				for(int x = 0; x < BOARD_ROWS; x++) {
+					for(int y = 0; y < BOARD_COLS; y++) {
+						buttons[x][y].setText("");
+						buttons[x][y].setEnabled(true);
+					}
+				}
+			}
+		});
+		timer.setRepeats(false);
+		timer.start();
+		
 	}
 
 	@Override
