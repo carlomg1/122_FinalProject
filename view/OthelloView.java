@@ -53,6 +53,19 @@ public class OthelloView implements GameView {
 	@Override
 	public void layoutGrid() {
 		panel.setLayout (new GridLayout (8, 8));	
+		updateBoard();
+	}
+
+	@Override
+	public void populateStartGrid() {
+		// TODO Auto-generated method stub
+				
+		
+	}
+
+	@Override
+	public void updateBoard() {
+		// TODO Auto-generated method stub
 		for(int i = 0 ; i < 8 ; i++){
 			for(int j = 0 ; j < 8 ; j++) {
 				if(othelloLogic.othelloGameState.board[i][j] == 1) {
@@ -89,19 +102,7 @@ public class OthelloView implements GameView {
 				
 			}
 		}
-	}
-
-	@Override
-	public void populateStartGrid() {
-		// TODO Auto-generated method stub
-				
 		
-	}
-
-	@Override
-	public void updateBoard() {
-		// TODO Auto-generated method stub
-		JButton topleft = new JButton(new CircleIconBlack());
 	}
 	
 	private class ButtonListener extends JButton implements ActionListener
@@ -116,8 +117,9 @@ public class OthelloView implements GameView {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			System.out.println(x);
+			System.out.print(x + ",");
 			System.out.println(y);
+			othelloLogic.handleMove(x,y);
 			
 		}
         
