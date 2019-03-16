@@ -50,7 +50,7 @@ public class TicTacToeView implements GameView {
 		this.frame.pack();
 		this.frame.setVisible(true);
 		this.frame.setSize(500, 500);
-
+	}
 	@Override
 	public void populateStartGrid() {
 

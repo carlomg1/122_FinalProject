@@ -95,6 +95,7 @@ public class MainGUI extends JFrame {
 //		            buttonListener12.t.setText("  "); 
 //			// TODO Auto-generated method stub
 //	
+			}
 	}
 
 	public static void method() {
