@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 
 
 import javax.swing.*;
-import view.MemoryButtonListener;
 
 public class MemoryLogic implements GameLogic {
 	private static final int MEMORY_BOARD_ROWS = 4;

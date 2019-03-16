@@ -1,6 +1,5 @@
-package view;
-import logic.MemoryGameState;
-import logic.MemoryLogic;
+package logic;
+import view.MemoryView;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
