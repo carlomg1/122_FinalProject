@@ -7,36 +7,35 @@ public class CheckersGameState{
 	private String playerTurn;
 	private int score;
 	private ArrayList<int[]> validMoves;
-	public Checker[][] playerOneCurrentState;
-	public Checker[][] playerTwoCurrentState;
+	public Checker[][] checkerBoard;
+	public int playerOneCount;
+	public int playerTwoCount;
 	
 	public CheckersGameState(){
 		this.score = 0;
 		this.playerTurn = "1";
 		this.validMoves =new ArrayList<int[]>();
-		this.playerOneCurrentState = new Checker[][]{
+		
+		this.playerOneCount = 12;
+				
+		this.playerTwoCount = 12;
+		
+		this.checkerBoard = new Checker[][]{
+			 { null, new Checker(1), null, new Checker(1), null, new Checker(1), null, new Checker(1) },
+			 { new Checker(1), null, new Checker(1), null, new Checker(1), null, new Checker(1), null },
+			 { null, new Checker(1), null, new Checker(1), null, new Checker(1), null, new Checker(1) },
 			 { null, null, null, null, null, null, null, null },
 			 { null, null, null, null, null, null, null, null },
-			 { null, null, null, null, null, null, null, null },
-			 { null, null, null, null, null, null, null, null },
-			 { null, null, null, null, null, null, null, null },
-			 { new Checker(), null, new Checker(), null, new Checker(), null, new Checker(), null },
-			 { null, new Checker(), null, new Checker(), null, new Checker(), null, new Checker() },
-			 { new Checker(), null, new Checker(), null, new Checker(), null, new Checker(), null }
-		};
-		this.playerTwoCurrentState = new Checker[][]{
-			 { null, new Checker(), null, new Checker(), null, new Checker(), null, new Checker() },
-			 { new Checker(), null, new Checker(), null, new Checker(), null, new Checker(), null },
-			 { null, new Checker(), null, new Checker(), null, new Checker(), null, new Checker() },
-			 { null, null, null, null, null, null, null, null },
-			 { null, null, null, null, null, null, null, null },
-			 { null, null, null, null, null, null, null, null },
-			 { null, null, null, null, null, null, null, null },
-			 { null, null, null, null, null, null, null, null }
+			 { new Checker(-1), null, new Checker(-1), null, new Checker(-1), null, new Checker(-1), null },
+			 { null, new Checker(-1), null, new Checker(-1), null, new Checker(-1), null, new Checker(-1) },
+			 { new Checker(-1), null, new Checker(-1), null, new Checker(-1), null, new Checker(-1), null }
 		};
 	}
 			
-	public void update(){}
+	public void update(){
+		// to update the checkBoard based on the logic
+		
+	}
 	
 	public void changeTurn(){
 		this.playerTurn = this.playerTurn.equals("1")? "-1":"1";
@@ -74,32 +73,35 @@ public class CheckersGameState{
 		this.validMoves = validMoves;
 	}
 
+	public int returnPlayer( Checker checker){
+		return checker.player;
+	}
 	
 	class Checker{
-		public final int[][] KingMove = new int[][]{
-			  { -1, 1 },
-			  { 1, 1 },
-			  { -1, -1},
-			  { 1, -1 }
-			};
-			
-		public final int[][] NormalMove = new int[][]{
-			  { -1, 1 },
-			  { 1, 1 }
-			};
 		
 		public int[][] move;
 		
 		public boolean isKing;
 		
-		public Checker(){
-			this.move = NormalMove;
+		public int player;
+		
+		public Checker( int player ){
 			this.isKing = false;
+			this.player=player;
+			this.move = new int[][]{
+				  { 1*this.player, -1*this.player },
+				  { 1*this.player, 1*this.player }
+				};
 		}
 		
 		public void turnKing(){
 			this.isKing = true;
-			this.move = KingMove;
+			this.move = new int[][]{
+				  { -1*this.player, 1*this.player },
+				  { 1*this.player, 1*this.player },
+				  { -1*this.player, -1*this.player},
+				  { 1*this.player, -1*this.player }
+				};
 		}
 	}
 }

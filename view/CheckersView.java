@@ -6,6 +6,10 @@ import java.util.ArrayList;
 import java.awt.*;  
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicButtonListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import logic.CheckersGameState;
 
 
@@ -33,7 +37,7 @@ public class CheckersView implements GameView {
 	@Override
 	public void startGame() {
 		// TODO Auto-generated method stub
-		this.layoutGrid();
+		this.populateStartGrid();
 		/*ArrayList<int[]> testmove= new ArrayList<int[]>();
 		int[] move1 = new int[]{3,2};
 		testmove.add(move1);
@@ -54,7 +58,6 @@ public class CheckersView implements GameView {
 		this.panel.setBorder (BorderFactory.createLineBorder (Color.red, 8));
 		this.panel.setBackground (Color.white);
 		
-		this.updateBoard();
 		this.frame.getContentPane().add(panel);
 		this.frame.pack();
 		this.frame.setVisible(true);
@@ -65,6 +68,9 @@ public class CheckersView implements GameView {
 	@Override
 	public void populateStartGrid() {
 		// TODO Auto-generated method stub
+		
+		this.layoutGrid();
+		this.updateBoard();
 		
 	}
 
@@ -80,22 +86,23 @@ public class CheckersView implements GameView {
 				black = true;
 			}
 			for (int j =0; j<8; ++j){ 
-				if (GameState.playerOneCurrentState[i][j] != null){
+				if (GameState.checkerBoard[i][j] != null && GameState.returnPlayer(GameState.checkerBoard[i][j])==-1){
 					final JButton button = new JButton(new CircleIconBlack());
 					button.setBackground(Color.gray);
 					button.setForeground(Color.gray);
 					button.setOpaque(true);
 					button.setBorder(BorderFactory.createLineBorder(Color.gray));
+					button.addActionListener(new ButtonAction(this.buttons));
 					buttons[i][j] = button;
 					this.panel.add(button);
 					black = false;
-				}
-				else if (GameState.playerTwoCurrentState[i][j] != null){
+				}else if (GameState.checkerBoard[i][j] != null && GameState.returnPlayer(GameState.checkerBoard[i][j])==1){
 					final JButton button = new JButton(new CircleIconRed());
 					button.setBackground(Color.gray);
 					button.setForeground(Color.gray);
 					button.setOpaque(true);
 					button.setBorder(BorderFactory.createLineBorder(Color.gray));
+					button.addActionListener(new ButtonAction(this.buttons));
 					buttons[i][j] = button;
 					this.panel.add(button);
 					black = false;
@@ -108,6 +115,7 @@ public class CheckersView implements GameView {
 						button.setForeground(Color.gray);
 						button.setOpaque(true);
 						button.setBorder(BorderFactory.createLineBorder(Color.gray));
+						button.addActionListener(new ButtonAction(this.buttons));
 						buttons[i][j] = button;
 						this.panel.add(button);
 						black = false;
@@ -134,6 +142,7 @@ public class CheckersView implements GameView {
 				button.setForeground(Color.darkGray);
 				button.setOpaque(true);
 				button.setBorder(BorderFactory.createLineBorder(Color.darkGray));
+				button.addActionListener(new ButtonAction(this.buttons));
 				buttons[move[0]][move[1]] = button;
 			}
 		}
@@ -228,4 +237,27 @@ public class CheckersView implements GameView {
 		    return 30;
 		  }
 		}
+	
+	class ButtonAction implements ActionListener{
+		
+		JButton[][] buttons;
+		
+		public ButtonAction(JButton[][] buttons){
+			this.buttons = buttons;
+		}
+		@Override
+		public void actionPerformed(ActionEvent e)
+        {
+			JButton button = (JButton) e.getSource();
+			for(int i = 0;i< 8; i++){
+	            for(int j = 0;j < 8;j++){
+	                if(button == this.buttons[i][j]){
+	                    //JButton clicked == this.buttons[i][j];
+	                	System.out.println(i+","+j);
+	                    // do something with this 
+	                }
+	            }
+	        }
+        }
+	}
 }

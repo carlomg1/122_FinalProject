@@ -4,7 +4,7 @@ import javax.swing.*;
 
 public class CheckersLogic implements GameLogic {
 	
-	private String turn;
+	private int turn;
 	
 	
 	@Override
