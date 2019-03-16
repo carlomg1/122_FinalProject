@@ -66,6 +66,10 @@ public class OthelloView implements GameView {
 	@Override
 	public void updateBoard() {
 		// TODO Auto-generated method stub
+		panel.removeAll();
+		panel.revalidate();
+		panel.repaint();
+		System.out.println("REMOVED");
 		for(int i = 0 ; i < 8 ; i++){
 			for(int j = 0 ; j < 8 ; j++) {
 				if(othelloLogic.othelloGameState.board[i][j] == 1) {
@@ -117,10 +121,9 @@ public class OthelloView implements GameView {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			System.out.print(x + ",");
-			System.out.println(y);
-			othelloLogic.handleMove(x,y);
-			
+			othelloLogic.othelloGameState = othelloLogic.handleMove(x,y);
+			buttons = new JButton[8][8];
+			updateBoard();
 		}
         
     }

@@ -87,6 +87,7 @@ public class MainGUI extends JFrame {
 		        if (s.equals("submit")) { 
 		        	MainGUI main = new MainGUI();
 		    		main.setVisible(true);
+		        }
 		    		
 //		            // set the text of the label to the text of the field 
 //		            l.setText( buttonListener12.t.getText()); 
