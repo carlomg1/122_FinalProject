@@ -51,10 +51,8 @@ public class TicTacToeView implements GameView {
 		this.frame.setVisible(true);
 		this.frame.setSize(500, 500);
 	}
-
-	@Override
+  
 	public void populateStartGrid() {
-
 		// TODO Auto-generated method stub
 		//maybe dont need thisp
 	}

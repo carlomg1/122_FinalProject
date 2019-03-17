@@ -2,7 +2,7 @@ package logic;
 
 import java.util.ArrayList;
 
-public class OthelloGameState{
+public class OthelloGameState implements GameState{
 	
 	public int playerTurn;
 	public int winner = 0;
@@ -14,7 +14,13 @@ public class OthelloGameState{
 	public int white = 2;
 	public int[][] board = new int[8][8];
 			
-	public void update(){}
+	public void update(){
+		
+	}//from interface
+	
+	public void update(int x, int y){
+		
+	}//from interface
 	public void changeTurn(){}
 	public void gameLoop(){}
 }

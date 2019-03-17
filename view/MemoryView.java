@@ -22,7 +22,6 @@ public class MemoryView implements GameView {
 	private static MemoryButtonListener buttons[][] = new MemoryButtonListener[BOARD_ROWS][BOARD_COLS];
 	private String player1;
 	private String player2;
-	private Board boardGame;
 	MemoryGameState currentState;
 
 	
@@ -39,14 +38,15 @@ public class MemoryView implements GameView {
 		this.layoutGrid();
 	}
 
-	public static void RevealSpace(int row, int col) {
-		buttons[row][col].revealed = true;
-		buttons[row][col].setText(Integer.toString(buttons[row][col].GetValue()));
-	}
-	
-	public static void HideSpace(int row, int col) {
-		buttons[row][col].revealed = false;
-		buttons[row][col].setText("");
+	public static void HideOrRevealSpace(int row, int col, boolean reveal) {
+		buttons[row][col].revealed = reveal;
+		if(reveal) {
+			buttons[row][col].setText(Integer.toString(buttons[row][col].GetValue()));	
+		}
+		else {
+			buttons[row][col].setText("");
+		}
+		
 	}
 	
 	@Override
@@ -83,6 +83,14 @@ public class MemoryView implements GameView {
 		timer.setRepeats(false);
 		timer.start();
 		
+	}
+	
+	public static void EnableOrDisableButtons(boolean enableOrDisable) {
+		for(int x = 0; x < BOARD_ROWS; x++) {
+			for(int y = 0; y < BOARD_COLS; y++) {
+				buttons[x][y].setEnabled(enableOrDisable);
+			}
+		}		
 	}
 
 	@Override
