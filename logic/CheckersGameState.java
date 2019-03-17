@@ -8,7 +8,6 @@ public class CheckersGameState implements GameState{
 	private int score;
 	public int[] currentChecker;
 	public ArrayList<int[]> validMoves;
-	public ArrayList<int[]> flipPieces;
 	public Checker[][] checkerBoard;
 	public int playerOneCount;
 	public int playerTwoCount;
