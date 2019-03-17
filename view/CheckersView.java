@@ -248,16 +248,23 @@ public class CheckersView implements GameView {
 		@Override
 		public void actionPerformed(ActionEvent e)
         {
+			int[] position = checkerPosition(e);
+        }
+		public int[] checkerPosition(ActionEvent e) {
 			JButton button = (JButton) e.getSource();
+			int[] result = new int[2];
 			for(int i = 0;i< 8; i++){
 	            for(int j = 0;j < 8;j++){
 	                if(button == this.buttons[i][j]){
 	                    //JButton clicked == this.buttons[i][j];
 	                	System.out.println(i+","+j);
-	                    // do something with this 
+	                	result[0] = i;
+	                	result[1] = j; 
 	                }
+	                return result;
 	            }
 	        }
-        }
+		return null;
+		}
 	}
 }
