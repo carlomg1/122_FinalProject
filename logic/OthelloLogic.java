@@ -1,6 +1,7 @@
 package logic;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 
 import javax.swing.*;
@@ -8,34 +9,83 @@ import javax.swing.*;
 import view.MainGUI;
 
 public class OthelloLogic implements GameLogic {
-	public OthelloGameState othelloGameState = new OthelloGameState();
-	private int black;
-	private int white;
-	private ArrayList<Tuple> tilesToFlip = new ArrayList<Tuple>();
-
-	public OthelloLogic() {
-		black = othelloGameState.black;
-		white = othelloGameState.white;
-		othelloGameState.playerTurn = black;
-		initializeBoard();
+	
+	public void initializeBoard(OthelloGameState gamestate) {
+		gamestate.board[3][3] = gamestate.black;
+		gamestate.board[3][4] = gamestate.white;
+		gamestate.board[4][3] = gamestate.white;
+		gamestate.board[4][4] = gamestate.black;
 	}
+	
+
+	public void handleMove(int x, int y, OthelloGameState gamestate) {
+		ArrayList<Tuple> validMoves = (ArrayList<Tuple>) findValidMove(x,y, gamestate);
+		flipTiles(validMoves, gamestate);
+		calculateScores(gamestate);
+	}
+	
+	public ArrayList<?> findValidMove(int row, int col, GameState gameState){
+		OthelloGameState othelloGameState = (OthelloGameState) gameState;
+		ArrayList<Tuple> validMoves = new ArrayList<Tuple>();
+		ArrayList<Tuple> directions = new ArrayList<Tuple>();
+		directions.add(new Tuple(-1, 0));
+		directions.add(new Tuple(1, 0));
+		directions.add(new Tuple(0, -1));
+		directions.add(new Tuple(0, 1));
+		directions.add(new Tuple(1, 1));
+		directions.add(new Tuple(1, -1));
+		directions.add(new Tuple(-1, 1));
+		directions.add(new Tuple(-1, -1));
+		
+		for(Tuple coords : directions) {
+			if(isValidMove(row + coords.x, col + coords.y, gameState)) {
+				validMoves.addAll(checkDirections(row, col, othelloGameState, 
+						new ArrayList<Tuple>(), coords.x, coords.y));
+			}
+		}
+		return validMoves;
+		
+	} // new added
+	
+	private ArrayList<Tuple> checkDirections(int row, int col, OthelloGameState gameState, 
+											ArrayList<Tuple> moves, int rowChange, int colChange){
+		try {
+			if(gameState.board[row + rowChange][col + colChange] == gameState.none) {
+				moves.clear();
+				return moves;
+			}
+			else if(gameState.board[row + rowChange][col + colChange] == getOppositeTurn(gameState)) {
+				moves.add(new Tuple(row + rowChange, col + colChange));
+				moves.add(new Tuple(row, col));
+				return checkDirections(row + rowChange, col + colChange, gameState, moves, rowChange, colChange);
+			}
+			else if(gameState.board[row + rowChange][col + colChange] == gameState.playerTurn) {
+				return moves;
+			}
+		}
+		catch(Exception ArrayIndexOutOfBoundsException) {
+			moves.clear();
+			return moves;
+		}
+		return moves;
+	}
+	
+	public boolean isValidMove(int row, int col, GameState gameState){
+		try {
+			OthelloGameState othelloGameState = (OthelloGameState) gameState;
+			return othelloGameState.board[row][col] == getOppositeTurn(othelloGameState);
+		}
+		catch(Exception ArrayIndexOutOfBoundsException) {
+			return false;
+		}
+		
+	} // new added
 
 	@Override
 	public boolean checkValidMove (JButton button){
 		return false;
 
 	}
-	
-	private boolean checkValidMove(int x, int y) {
-		return checkUpper(x,y) || checkLower(x,y) || checkLeft(x,y) || checkRight(x,y);
-	public ArrayList<?> findValidMove(int row, int col, GameState gameState){
-		return null;
-	} // new added
-
-	public boolean isValidMove(int row, int col, GameState gameState){
-		return false;
-	} // new added
-	
 	
 	public boolean checkValidMove(ArrayList<?> validMoves, GameState gstate){
 		return false;
@@ -45,133 +95,43 @@ public class OthelloLogic implements GameLogic {
 		return false;
 
 	}
+	
 	public void changeTurn(){
 
 	}
-
-	public void initializeBoard() {
-		othelloGameState.board[3][3] = black;
-		othelloGameState.board[3][4] = white;
-		othelloGameState.board[4][3] = white;
-		othelloGameState.board[4][4] = black;
-	}
 	
+	private void flipTiles(ArrayList<Tuple> validMoves, OthelloGameState gamestate) {
+		for(Tuple coord : validMoves) {
+			gamestate.board[coord.x][coord.y] = gamestate.playerTurn;
+		}
+	}
 
-	public OthelloGameState handleMove(int x, int y) {
-		if(checkValidMove(x,y)) {
-			flipTiles();
-			switchTurns();
-			tilesToFlip.clear();
-			return othelloGameState;
+	private int getOppositeTurn(OthelloGameState gamestate) {
+		if(gamestate.playerTurn == gamestate.black) {
+			return gamestate.white;
 		}
 		else {
-			return null;
+			return gamestate.black;
 		}
+	}
+
+	public void switchTurns(OthelloGameState gamestate) {
+		gamestate.playerTurn = getOppositeTurn(gamestate);
 	}
 	
-	private void flipTiles() {
-		for(Tuple coord : tilesToFlip) {
-			System.out.println("X: " + coord.x + ", Y: " + coord.y);
-			othelloGameState.board[coord.x][coord.y] = othelloGameState.playerTurn;
-		}
-	}
-
-	private int getOppositeTurn(int currentTurn) {
-		if(currentTurn == black) {
-			return white;
-		}
-		else {
-			return black;
-		}
-	}
-
-	private boolean checkUpper(int x, int y) {
-		try {
-			int oppositeTurn = getOppositeTurn(othelloGameState.playerTurn);
-			if(othelloGameState.board[x - 1][y] == oppositeTurn) {
-				tilesToFlip.add(new Tuple(x - 1, y));
-				tilesToFlip.add(new Tuple(x, y));
-				return checkUpper(x - 1, y);
-			}
-			else if (othelloGameState.board[x - 1][y] == othelloGameState.playerTurn) {
-				return true;
-			}
-			else {
-				return false;
+	private void calculateScores(OthelloGameState gamestate) {
+		gamestate.player1Total = 0;
+		gamestate.player2Total = 0;
+		for(int i = 0; i < 8 ; i++) {
+			for(int j = 0 ; j < 8 ; j++) {
+				if(gamestate.board[i][j] == gamestate.black) {
+					gamestate.player1Total += 1;
+				}
+				else if(gamestate.board[i][j] == gamestate.white) {
+					gamestate.player2Total += 1;
+				}
 			}
 		}
-		catch(Exception ArrayIndexOutOfBoundsException) {
-			return true;
-		}
-
-	}
-
-	private boolean checkLower(int x, int y) {
-		try {
-			int oppositeTurn = getOppositeTurn(othelloGameState.playerTurn);
-			if(othelloGameState.board[x+1][y] == oppositeTurn) {
-				tilesToFlip.add(new Tuple(x + 1, y));
-				tilesToFlip.add(new Tuple(x, y));
-				return checkLower(x+1,y);
-			}
-			else if(othelloGameState.board[x+1][y] == othelloGameState.playerTurn) {
-				return true;
-			}
-			else {
-				return false;
-			}
-		}
-		catch(Exception ArrayIndexOutOfBoundsException) {
-			return true;
-
-		}
-
-	}
-
-	private boolean checkLeft(int x, int y) {
-		try {
-			int oppositeTurn = getOppositeTurn(othelloGameState.playerTurn);
-			if(othelloGameState.board[x][y-1] == oppositeTurn) {
-				tilesToFlip.add(new Tuple(x, y-1));
-				tilesToFlip.add(new Tuple(x, y));
-				return checkLeft(x, y-1);
-			}
-			else if(othelloGameState.board[x][y-1] == othelloGameState.playerTurn) {
-				return true;
-			}
-			else {
-				return false;
-			}
-		}
-		catch(Exception ArrayIndexOutOfBoundsException) {
-			return true;
-		}
-
-	}
-
-	private boolean checkRight(int x, int y) {
-		try {
-			int oppositeTurn = getOppositeTurn(othelloGameState.playerTurn);
-			if(othelloGameState.board[x][y+1] == oppositeTurn) {
-				tilesToFlip.add(new Tuple(x, y+1));
-				tilesToFlip.add(new Tuple(x, y));
-				return checkRight(x, y+1);
-			}
-			else if(othelloGameState.board[x][y+1] == othelloGameState.playerTurn) {
-				return true;
-			}
-			else {
-				return false;
-			}
-		}
-		catch(Exception ArrayIndexOutOfBoundsException) {
-			return true;
-		}
-
-	}
-
-	private void switchTurns() {
-		othelloGameState.playerTurn = getOppositeTurn(othelloGameState.playerTurn);
 	}
 	
 	//Taken from stackoverflow
