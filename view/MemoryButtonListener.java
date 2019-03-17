@@ -39,17 +39,24 @@ public class MemoryButtonListener extends JButton implements ActionListener
 	    		
 	    		//One button pressed, reveal it
 	    		if(MemoryLogic.previousButton == null) {
-	    			MemoryView.RevealSpace(row, column);
+	    			MemoryView.HideOrRevealSpace(row, column, true);
 	    			MemoryLogic.previousButton = this;
 	    			
 	    			
 	    		}
 	    		//2nd button pressed, check if its a match
 	    		else {
+	    			MemoryView.HideOrRevealSpace(row, column, true);
+	    			
+	    			//Matched correctly, update score
+	    			if(MemoryLogic.isMatch(this)) {
+	    				
+	    			}
+	    			else {
+	    				MemoryView.HideOrRevealSpace(MemoryLogic.previousButton.row, MemoryLogic.previousButton.column, false);
+	    				MemoryView.HideOrRevealSpace(row, column, false);
+	    			}
 	    			MemoryLogic.previousButton = null;
-	    			MemoryView.RevealSpace(row, column);
-	    			
-	    			
 	    		}
 	    		
 	    		//Check if the game is over
