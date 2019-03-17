@@ -4,7 +4,7 @@ import java.util.Random;
 import java.util.Map;
 import java.util.HashMap;
 
-public class MemoryGameState{
+public class MemoryGameState implements GameState{
 	private static final int BOARD_ROWS = 4;
 	private static final int BOARD_COLS = 4;
 	
@@ -47,7 +47,7 @@ public class MemoryGameState{
 		return hiddenNumbers[x][y];
 	}
 	
-	public void update(){}
+	public void update(){} // from interface
 	
 	public void changeTurn(){
 		playerTurn = playerTurn == 1 ? 2 : 1;
@@ -93,4 +93,8 @@ public class MemoryGameState{
 	private int GetUpperBound() {
 		return (BOARD_ROWS * BOARD_COLS) / 2;
 	}
+	
+	public void update(int x, int y){
+		
+	} // from interface
 }

@@ -1,5 +1,6 @@
 package logic;
 
+import java.util.ArrayList;
 import javax.swing.*;
 
 import view.MainGUI;
@@ -21,6 +22,19 @@ public class OthelloLogic implements GameLogic {
 		return false;
 
 	}
+	
+	public ArrayList<?> findValidMove(int row, int col, GameState gameState){
+		return null;
+	} // new added
+
+	public boolean isValidMove(int row, int col, GameState gameState){
+		return false;
+	} // new added
+	
+	
+	public boolean checkValidMove(ArrayList<?> validMoves, GameState gstate){
+		return false;
+	} // new added
 
 	public boolean findWinner(){
 		return false;
