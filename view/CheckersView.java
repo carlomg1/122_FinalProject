@@ -12,14 +12,13 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import logic.CheckersGameState;
 
-
 public class CheckersView implements GameView {
 	public String Player1;
 	public String Player2;
 	public Board boardGame;
 	public JFrame frame;
 	public JPanel panel;
-	public JButton[][] buttons;
+	public Button[][] buttons;
 	public CheckersGameState GameState;
 	
 	public CheckersView() {
@@ -63,6 +62,7 @@ public class CheckersView implements GameView {
 		this.frame.setVisible(true);
 		this.frame.setSize(500, 500);
 		
+
 	}
 
 	@Override
@@ -243,6 +243,8 @@ public class CheckersView implements GameView {
 		
 		CheckersView checkerView;
 		
+    int[] position;
+    
 		public ButtonAction(CheckersView checkerView){
 			this.checkerView = checkerView;
 		}
