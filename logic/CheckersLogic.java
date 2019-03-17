@@ -13,11 +13,8 @@ public class CheckersLogic implements GameLogic {
 	}
 	
 	public <T> ArrayList<?> findValidMove(int row, int col, GameState gameState){
-		System.out.print(row+col);
 		
 		CheckersGameState checkerState = (CheckersGameState) gameState;
-		
-		System.out.print(checkerState.checkerBoard);
 		
 		ArrayList<T> validMoves = new ArrayList<T>();
 		for(int[] move: checkerState.checkerBoard[row][col].move) {

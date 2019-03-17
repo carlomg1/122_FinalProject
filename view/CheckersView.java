@@ -136,7 +136,6 @@ public class CheckersView implements GameView {
 	public void drawValidMove(ArrayList<int[]> validMoves){
 		
 		for (int[] move : validMoves){
-			System.out.println("x:"+move[0]+" y:"+move[1]);
 			if (move.length == 2){
 				final JButton button = new JButton( new ValidMoveIcon());
 				button.setBackground(Color.darkGray);
@@ -243,22 +242,29 @@ public class CheckersView implements GameView {
 		
 		CheckersView checkerView;
 		
+		int[] position;
+		
 		public ButtonAction(CheckersView checkerView){
 			this.checkerView = checkerView;
 		}
+		
 		@Override
 		public void actionPerformed(ActionEvent e)
         {
-			int[] position = this.checkerPosition(e);
+			this.position = this.checkerPosition(e);
 			
-			this.checkerView.GameState.update(position[0], position[1]);
-			if (this.checkerView.GameState.validMoves!=null && this.checkerView.GameState.currentChecker!=null){
-				this.checkerView.drawValidMove(this.checkerView.GameState.validMoves);
+			if (this.position!=null && this.checkerView.GameState.checkerBoard[this.position[0]][this.position[1]]!=null){
+				this.checkerView.updateBoard();
+				this.checkerView.GameState.update(this.position[0], this.position[1]);
+				if (this.checkerView.GameState.validMoves!=null && this.checkerView.GameState.currentChecker!=null){
+					this.checkerView.drawValidMove(this.checkerView.GameState.validMoves);
+				}
 			}
         }
 		public int[] checkerPosition(ActionEvent e) {
 			JButton button = (JButton) e.getSource();
 			int[] result = new int[2];
+			
 			for(int i = 0;i< 8; i++){
 	            for(int j = 0;j < 8;j++){
 	                if(button == this.checkerView.buttons[i][j]){
