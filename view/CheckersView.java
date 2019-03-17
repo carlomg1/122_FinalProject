@@ -1,9 +1,16 @@
-package View;
+package view;
+
+
+import java.util.ArrayList;
 
 import java.awt.*;  
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicButtonListener;
-import Logic.CheckersGameState;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import logic.CheckersGameState;
 
 public class CheckersView implements GameView {
 	public String Player1;
@@ -16,17 +23,26 @@ public class CheckersView implements GameView {
 	
 	public CheckersView() {
 		GameState = new CheckersGameState();
-		this.buttons = new Button[8][];
+		this.buttons = new JButton[8][];
 		for (int i = 0; i<8; ++i){
-			this.buttons[i]=new Button[8];
+			this.buttons[i]=new JButton[8];
+			for(int j = 0; j<8; ++j){
+				buttons[i][j] = null;
+			}
 		}
-		this.startGame();
+		//this.startGame();
 	}
 
 	@Override
 	public void startGame() {
 		// TODO Auto-generated method stub
-		this.layoutGrid();
+		this.populateStartGrid();
+		/*ArrayList<int[]> testmove= new ArrayList<int[]>();
+		int[] move1 = new int[]{3,2};
+		testmove.add(move1);
+		
+		this.drawValidMove(testmove);*/ 
+		//test for draw valid move
 		
 	}
 
@@ -41,17 +57,20 @@ public class CheckersView implements GameView {
 		this.panel.setBorder (BorderFactory.createLineBorder (Color.red, 8));
 		this.panel.setBackground (Color.white);
 		
-		this.updateBoard();
 		this.frame.getContentPane().add(panel);
 		this.frame.pack();
 		this.frame.setVisible(true);
 		this.frame.setSize(500, 500);
 		
+
 	}
 
 	@Override
 	public void populateStartGrid() {
 		// TODO Auto-generated method stub
+		
+		this.layoutGrid();
+		this.updateBoard();
 		
 	}
 
@@ -67,21 +86,24 @@ public class CheckersView implements GameView {
 				black = true;
 			}
 			for (int j =0; j<8; ++j){ 
-				if (GameState.playerOneCurrentState[i][j]==1){
+				if (GameState.checkerBoard[i][j] != null && GameState.returnPlayer(GameState.checkerBoard[i][j])==-1){
 					final JButton button = new JButton(new CircleIconBlack());
 					button.setBackground(Color.gray);
 					button.setForeground(Color.gray);
 					button.setOpaque(true);
 					button.setBorder(BorderFactory.createLineBorder(Color.gray));
+					button.addActionListener(new ButtonAction(this));
+					buttons[i][j] = button;
 					this.panel.add(button);
 					black = false;
-				}
-				else if (GameState.playerTwoCurrentState[i][j]==1){
+				}else if (GameState.checkerBoard[i][j] != null && GameState.returnPlayer(GameState.checkerBoard[i][j])==1){
 					final JButton button = new JButton(new CircleIconRed());
 					button.setBackground(Color.gray);
 					button.setForeground(Color.gray);
 					button.setOpaque(true);
 					button.setBorder(BorderFactory.createLineBorder(Color.gray));
+					button.addActionListener(new ButtonAction(this));
+					buttons[i][j] = button;
 					this.panel.add(button);
 					black = false;
 				}
@@ -93,6 +115,8 @@ public class CheckersView implements GameView {
 						button.setForeground(Color.gray);
 						button.setOpaque(true);
 						button.setBorder(BorderFactory.createLineBorder(Color.gray));
+						button.addActionListener(new ButtonAction(this));
+						buttons[i][j] = button;
 						this.panel.add(button);
 						black = false;
 					}else{
@@ -104,6 +128,40 @@ public class CheckersView implements GameView {
 						this.panel.add(label);
 						black = true;
 					}
+				}
+			}
+		}
+	}
+	
+	public void drawValidMove(ArrayList<int[]> validMoves){
+		
+		for (int[] move : validMoves){
+			System.out.println("x:"+move[0]+" y:"+move[1]);
+			if (move.length == 2){
+				final JButton button = new JButton( new ValidMoveIcon());
+				button.setBackground(Color.darkGray);
+				button.setForeground(Color.darkGray);
+				button.setOpaque(true);
+				button.setBorder(BorderFactory.createLineBorder(Color.darkGray));
+				button.addActionListener(new ButtonAction(this));
+				buttons[move[0]][move[1]] = button;
+			}
+		}
+		this.panel.removeAll();
+		this.panel.revalidate();
+		this.panel.repaint();
+		
+		for(int i=0; i<8; i++){ 
+			for (int j =0; j<8; ++j){
+				if (buttons[i][j]!=null){
+					this.panel.add(buttons[i][j]);
+				}else{
+					final JLabel label = new JLabel();
+					label.setBackground(Color.white);
+					label.setForeground(Color.white);
+					label.setOpaque(true);
+					label.setBorder(BorderFactory.createLineBorder(Color.gray));
+					this.panel.add(label);
 				}
 			}
 		}
@@ -158,4 +216,64 @@ public class CheckersView implements GameView {
 		    return 30;
 		  }
 		}
+	
+	class ValidMoveIcon implements Icon {
+		  @Override
+		  public void paintIcon(Component c, Graphics g, int x, int y) {
+		    //g.drawOval(10, 10, 20, 20);
+		    Graphics2D g2 = (Graphics2D) g.create();
+		    //Draw the icon at the specified x, y location:
+		    g2.drawOval(1, 1, c.getWidth()-3, c.getHeight()-3);
+		    g2.setColor(Color.white);
+		    g2.fillOval(8, 8, c.getWidth()-16, c.getHeight()-16);
+		    g2.dispose();
+		  }
+
+		  @Override
+		  public int getIconWidth() {
+		    return 30;
+		  }
+		  @Override
+		  public int getIconHeight() {
+		    return 30;
+		  }
+		}
+	
+	class ButtonAction implements ActionListener{
+		
+		CheckersView checkerView;
+		
+    int[] position;
+    
+		public ButtonAction(CheckersView checkerView){
+			this.checkerView = checkerView;
+		}
+		@Override
+		public void actionPerformed(ActionEvent e)
+        {
+			int[] position = this.checkerPosition(e);
+			
+			this.checkerView.GameState.update(position[0], position[1]);
+			if (this.checkerView.GameState.validMoves!=null && this.checkerView.GameState.currentChecker!=null){
+				this.checkerView.drawValidMove(this.checkerView.GameState.validMoves);
+			}
+        }
+		public int[] checkerPosition(ActionEvent e) {
+			JButton button = (JButton) e.getSource();
+			int[] result = new int[2];
+			for(int i = 0;i< 8; i++){
+	            for(int j = 0;j < 8;j++){
+	                if(button == this.checkerView.buttons[i][j]){
+	                    //JButton clicked == this.buttons[i][j];
+	         
+	                	result[0] = i;
+	                	result[1] = j; 
+	                	
+		                return result;
+	                }
+	            }
+	        }
+		return null;
+		}
+	}
 }
