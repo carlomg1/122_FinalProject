@@ -40,7 +40,7 @@ public class MemoryLogic implements GameLogic {
 		
 	}
 	
-	public boolean onRonudCheck(){
+	public boolean onRoundCheck(){
 		return false;
 		
 	}

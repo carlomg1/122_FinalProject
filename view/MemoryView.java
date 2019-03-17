@@ -93,7 +93,7 @@ public class MemoryView implements GameView {
 			}
 		}		
 	}
-
+	
 	@Override
 	public void populateStartGrid() {
 		// TODO Auto-generated method stub

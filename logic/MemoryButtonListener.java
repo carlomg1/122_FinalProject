@@ -51,7 +51,13 @@ public class MemoryButtonListener extends JButton implements ActionListener
 	    			if(MemoryLogic.isMatch(this)) {
 	    				
 	    			}
+	    			
+	    			//Wrong choice, hide both spaces now
 	    			else {
+	    				//Need to implement waiting a bit before hiding the buttons again
+	    				
+	    				
+	    				
 	    				MemoryView.HideOrRevealSpace(MemoryLogic.previousButton.row, MemoryLogic.previousButton.column, false);
 	    				MemoryView.HideOrRevealSpace(row, column, false);
 	    			}
