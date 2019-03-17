@@ -2,7 +2,7 @@ package logic;
 
 import java.util.ArrayList;
 
-public class CheckersGameState{
+public class CheckersGameState implements GameState{
 	
 	private String playerTurn;
 	private int score;
@@ -35,6 +35,10 @@ public class CheckersGameState{
 	public void update(){
 		// to update the checkBoard based on the logic
 		
+	}
+	
+	public void update(int x, int y){
+		// to update the checkBoard based on the logic, this take the coordinates of the clicked button
 	}
 	
 	public void changeTurn(){
