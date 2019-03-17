@@ -51,21 +51,50 @@ public class CheckersGameState implements GameState{
 		// to update the checkBoard based on the logic, this take the coordinates of the clicked button
 		if (this.checkerBoard[x][y]!=null && this.checkerBoard[x][y].player==this.playerTurn){
 			this.validMoves = (ArrayList<int[]>) this.checkerLogic.findValidMove(x, y, this);
-			for ( int[] i : this.validMoves){System.out.println(i[0]+i[1]);}
-		
-			this.currentChecker = new int[]{x,y};
-		}
-		
-		if (Math.abs(x)==1 && Math.abs(y)==1){
 			
-		}
+			this.currentChecker = new int[]{x,y};
+			
+		} //if player want to check valid moves, do program above
+		else if (this.currentChecker!=null && this.validMoves.size()!=0 && this.checkerBoard[x][y]==null){
+
+			if (this.checkerLogic.isValidMove(x, y, this)){
+				
+				this.flipPieces = (ArrayList<int[]>) this.checkerLogic.removePieces(new int[]{x, y}, this);
+				
+				if (this.flipPieces!=null){
+					this.checkerBoard[x][y]=this.checkerBoard[this.currentChecker[0]][this.currentChecker[1]];
+					this.checkerBoard[this.currentChecker[0]][this.currentChecker[1]]=null;
+					for (int[] move : this.flipPieces){
+						this.checkerBoard[move[0]][move[1]]=null;
+						if (this.playerTurn==-1) this.playerOneCount-=1;
+						else this.playerTwoCount-=1;
+					}
+				}else{
+					this.checkerBoard[x][y]=this.checkerBoard[this.currentChecker[0]][this.currentChecker[1]];
+					this.checkerBoard[this.currentChecker[0]][this.currentChecker[1]]=null;
+				}
+				
+				if (x==7 && this.checkerBoard[x][y].player==1){
+					this.checkerBoard[x][y].turnKing();
+				}
+				else if (x==0 && this.checkerBoard[x][y].player==-1){
+					this.checkerBoard[x][y].turnKing();
+				}
+				
+				this.currentChecker = null;
+				this.validMoves = new ArrayList<int[]>();
+				this.flipPieces = null;
+				this.changeTurn();
+			}
+		} // if player want to move checker after checking valid move, do program above
+		
 	}
 	
 	public void changeTurn(){
 		this.playerTurn = this.playerTurn==1? -1: 1;
 	}
 	
-	public void gameLoop(){}
+	public void gameLoop(){} // what is this
 	
 	public int getPlayerTurn()
 	{

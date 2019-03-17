@@ -51,7 +51,7 @@ public class CheckersView implements GameView {
 	public void layoutGrid() {
 		// TODO Auto-generated method stub
 		this.frame = new JFrame ("Checkers");
-		this.frame.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
+		this.frame.setDefaultCloseOperation (JFrame.DISPOSE_ON_CLOSE);
 
 		this.panel = new JPanel(); //creating a panel with a box like a checker board
 		this.panel.setLayout(new GridLayout(8, 8));
@@ -77,6 +77,10 @@ public class CheckersView implements GameView {
 	@Override
 	public void updateBoard() {
 		// TODO Auto-generated method stub
+
+		this.panel.removeAll();
+		this.panel.revalidate();
+		this.panel.repaint();
 		
 		boolean black;
 		for(int i=0; i<8; i++){ //placing the player 1 checkers
@@ -259,6 +263,9 @@ public class CheckersView implements GameView {
 				if (this.checkerView.GameState.validMoves!=null && this.checkerView.GameState.currentChecker!=null){
 					this.checkerView.drawValidMove(this.checkerView.GameState.validMoves);
 				}
+			} else if (this.position!=null && this.checkerView.GameState.checkerBoard[this.position[0]][this.position[1]]==null){
+				this.checkerView.GameState.update(this.position[0], this.position[1]);
+				this.checkerView.updateBoard();
 			}
         }
 		public int[] checkerPosition(ActionEvent e) {

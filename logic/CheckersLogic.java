@@ -49,28 +49,36 @@ public class CheckersLogic implements GameLogic {
 		move[0] = row;
 		move[1] = col;
 		
-		if(checkerState.validMoves.contains(move)) {
-			return true;
+		for(int[] validMove: checkerState.validMoves){
+			if(validMove[0] == move[0] && validMove[1] == move[1]){
+				return true;
+			}
 		}
 		return false;	
 	}
 	public <T> ArrayList<?> removePieces(int[] dest, GameState gameState) {
 		CheckersGameState checkerState = (CheckersGameState) gameState;
+		
+		if (Math.abs(dest[0]-checkerState.currentChecker[0])==1 && Math.abs(dest[1]-checkerState.currentChecker[1])==1) 
+			return null;
+		
 		ArrayList<T> flipPieces = new ArrayList<T>();
-		for(int[] move: checkerState.checkerBoard[checkerState.currentChecker[0]][checkerState.currentChecker[1]].move) {
-			try {
-				if(checkerState.checkerBoard[checkerState.currentChecker[0]+move[0]][checkerState.currentChecker[1]+move[1]].player != checkerState.checkerBoard[checkerState.currentChecker[0]][checkerState.currentChecker[1]].player) {
-					if(checkerState.checkerBoard[checkerState.currentChecker[0]+ 2*move[0]][checkerState.currentChecker[1]+ 2*move[1]] == null) {
-						int[] flipMe = new int[2];
-						flipMe[0] = checkerState.currentChecker[0]+ 2*move[0];
-						flipMe[1] = checkerState.currentChecker[1]+ 2*move[1];
-						flipPieces.add((T) flipMe);
-					}
+		int[] move = new int[2];
+		move[0] =  (dest[0]-checkerState.currentChecker[0]>0)?1:-1;
+		move[1] =  (dest[1]-checkerState.currentChecker[1]>0)?1:-1;
+		try {
+			if(checkerState.checkerBoard[checkerState.currentChecker[0]+move[0]][checkerState.currentChecker[1]+move[1]].player
+					!= checkerState.checkerBoard[checkerState.currentChecker[0]][checkerState.currentChecker[1]].player) {
+				if(checkerState.checkerBoard[checkerState.currentChecker[0]+ 2*move[0]][checkerState.currentChecker[1]+ 2*move[1]] == null) {
+					int[] flipMe = new int[2];
+					flipMe[0] = checkerState.currentChecker[0]+ move[0];
+					flipMe[1] = checkerState.currentChecker[1]+ move[1];
+					flipPieces.add((T) flipMe);
 				}
 			}
-			catch(Exception e) {
+		}
+		catch(Exception e) {
 				
-			}
 		}
 		return flipPieces;
 	}
@@ -81,8 +89,13 @@ public class CheckersLogic implements GameLogic {
 	}
 	
 	
-	public boolean findWinner(){
-		return false;
+	public int findWinner(GameState gstate){
+		CheckersGameState checkerState = (CheckersGameState) gstate;
+		if (checkerState.playerOneCount == 0)
+			return -1;
+		else if (checkerState.playerTwoCount == 0)
+			return 1;
+		return 0;
 		
 	}
 	public void changeTurn(){
