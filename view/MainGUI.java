@@ -55,7 +55,7 @@ public class MainGUI extends JFrame {
 	 */
 	public static void main (String[] args) {
 		buttonListener12 again=new buttonListener12();
-		again.method();
+		method();
 		//method();
 		//Start the MainGUI
 //		MainGUI main = new MainGUI();
@@ -144,6 +144,5 @@ public class MainGUI extends JFrame {
 	 * @return a new JButton created
 	 */
 
-	}
 }
 

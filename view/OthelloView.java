@@ -2,6 +2,7 @@ package view;
 
 import javax.swing.JPanel;
 
+import logic.OthelloGameState;
 import logic.OthelloLogic;
 
 import java.awt.*;
@@ -16,9 +17,11 @@ public class OthelloView implements GameView {
 	public Board boardGame;
 	public JFrame jframe = new JFrame();
 	public JPanel panel;
+	public JLabel player1Score;
+	public JLabel player2Score;
 	public int numberButtons;
 	public JButton buttons[][];
-	public OthelloLogic othelloLogic;
+	public OthelloGameState othelloGameState;
 	
 	public OthelloView() {
 		//Set JPanel
@@ -38,7 +41,11 @@ public class OthelloView implements GameView {
 		numberButtons=64;
 		buttons = new JButton[8][8]; 
 		
-		othelloLogic = new OthelloLogic();
+		othelloGameState = new OthelloGameState();
+		
+		//Scoreboard
+		player1Score = new JLabel();
+		player2Score = new JLabel();
 	}
 
 	@Override
@@ -66,9 +73,13 @@ public class OthelloView implements GameView {
 	@Override
 	public void updateBoard() {
 		// TODO Auto-generated method stub
+		panel.removeAll();
+		panel.revalidate();
+		panel.repaint();
 		for(int i = 0 ; i < 8 ; i++){
 			for(int j = 0 ; j < 8 ; j++) {
-				if(othelloLogic.othelloGameState.board[i][j] == 1) {
+				System.out.print(othelloGameState.board[i][j]);
+				if(othelloGameState.board[i][j] == 1) {
 					JButton button = new JButton(new CircleIconBlack());
 					buttons[i][j] = button;
 					button.setBackground(Color.green);
@@ -78,7 +89,7 @@ public class OthelloView implements GameView {
 					panel.add(button);
 					button.addActionListener(new ButtonListener(i, j));
 				}
-				else if (othelloLogic.othelloGameState.board[i][j] == 2){
+				else if (othelloGameState.board[i][j] == 2){
 					JButton button = new JButton(new CircleIconWhite());
 					buttons[i][j] = button;
 					button.setBackground(Color.green);
@@ -98,10 +109,12 @@ public class OthelloView implements GameView {
 					panel.add(button);
 					button.addActionListener(new ButtonListener(i, j));
 				}
-				
-				
 			}
 		}
+//		player1Score.setText("Black (Player 1): " + Integer.toString(othelloGameState.player1Total));
+//		player2Score.setText("White (Player 2): "+ Integer.toString(othelloGameState.player2Total));
+//		panel.add(player1Score);
+//		panel.add(player2Score);
 		
 	}
 	
@@ -117,10 +130,9 @@ public class OthelloView implements GameView {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			System.out.print(x + ",");
-			System.out.println(y);
-			othelloLogic.handleMove(x,y);
-			
+			othelloGameState.update(x, y);
+			buttons = new JButton[8][8];
+			updateBoard();
 		}
         
     }
