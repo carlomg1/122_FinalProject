@@ -12,21 +12,32 @@ public class CheckersLogic implements GameLogic {
 		
 	}
 	
-	public <T> ArrayList<?> findValidMove(int row, int col, CheckersGameState gameState){
+	public <T> ArrayList<?> findValidMove(int row, int col, GameState gameState){
+		System.out.print(row+col);
+		
+		CheckersGameState checkerState = (CheckersGameState) gameState;
+		
+		System.out.print(checkerState.checkerBoard);
+		
 		ArrayList<T> validMoves = new ArrayList<T>();
-		for(int[] move: gameState.checkerBoard[row][col].move) {
-			if(gameState.checkerBoard[row+move[0]][col+move[1]].player != gameState.checkerBoard[row][col].player) {
-				if(gameState.checkerBoard[row+ 2*move[0]][col+ 2*move[1]] == null) {
+		for(int[] move: checkerState.checkerBoard[row][col].move) {
+			try {
+				if(checkerState.checkerBoard[row+move[0]][col+move[1]] == null) {
 					int[] newMove = new int[2];
-					newMove[0] = row+ 2*move[0];
-					newMove[1] = col+ 2*move[1];
+					newMove[0] = row+ move[0];
+					newMove[1] = col+ move[1];
 					validMoves.add((T) newMove);
 				}
-			}else if(gameState.checkerBoard[row+move[0]][col+move[1]] == null) {
-				int[] newMove = new int[2];
-				newMove[0] = row+ 2*move[0];
-				newMove[1] = col+ 2*move[1];
-				validMoves.add((T) newMove);
+				else if(checkerState.checkerBoard[row+move[0]][col+move[1]].player != checkerState.checkerBoard[row][col].player) {
+					if(checkerState.checkerBoard[row+ 2*move[0]][col+ 2*move[1]] == null) {
+						int[] newMove = new int[2];
+						newMove[0] = row+ 2*move[0];
+						newMove[1] = col+ 2*move[1];
+						validMoves.add((T) newMove);
+					}
+				}
+			}catch(Exception e){
+				continue;
 			}
 		}
 		return validMoves;
@@ -41,6 +52,7 @@ public class CheckersLogic implements GameLogic {
 		return false;
 	}
 	
+	
 	public boolean findWinner(){
 		return false;
 		
@@ -48,5 +60,6 @@ public class CheckersLogic implements GameLogic {
 	public void changeTurn(){
 		
 	}
+
 
 }

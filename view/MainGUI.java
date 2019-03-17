@@ -97,7 +97,7 @@ public class MainGUI extends JFrame {
 //			// TODO Auto-generated method stub
 //	
 			}
-	}
+
 
 	public static void method() {
 
@@ -144,6 +144,6 @@ public class MainGUI extends JFrame {
 	 * @return a new JButton created
 	 */
 
-	}
 }
 
+}

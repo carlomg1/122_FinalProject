@@ -4,17 +4,24 @@ import java.util.ArrayList;
 
 public class CheckersGameState implements GameState{
 	
-	private String playerTurn;
+	private int playerTurn;
 	private int score;
-	private ArrayList<int[]> validMoves;
+	public int[] currentChecker;
+	public ArrayList<int[]> validMoves;
 	public Checker[][] checkerBoard;
 	public int playerOneCount;
 	public int playerTwoCount;
 	
+	public CheckersLogic checkerLogic;
+	
 	public CheckersGameState(){
 		this.score = 0;
-		this.playerTurn = "1";
+		this.playerTurn = -1;
+		
 		this.validMoves =new ArrayList<int[]>();
+		this.currentChecker = null;
+		
+		this.checkerLogic = new CheckersLogic();
 		
 		this.playerOneCount = 12;
 				
@@ -35,24 +42,36 @@ public class CheckersGameState implements GameState{
 	public void update(){
 		// to update the checkBoard based on the logic
 		
+		// not using
+		
 	}
 	
 	public void update(int x, int y){
 		// to update the checkBoard based on the logic, this take the coordinates of the clicked button
+		if (this.checkerBoard[x][y]!=null && this.checkerBoard[x][y].player==this.playerTurn){
+			this.validMoves = (ArrayList<int[]>) this.checkerLogic.findValidMove(x, y, this);
+			for ( int[] i : this.validMoves){System.out.println(i[0]+i[1]);}
+		
+			this.currentChecker = new int[]{x,y};
+		}
+		
+		if (Math.abs(x)==1 && Math.abs(y)==1){
+			
+		}
 	}
 	
 	public void changeTurn(){
-		this.playerTurn = this.playerTurn.equals("1")? "-1":"1";
+		this.playerTurn = this.playerTurn==1? -1: 1;
 	}
 	
 	public void gameLoop(){}
 	
-	public String getPlayerTurn()
+	public int getPlayerTurn()
 	{
 		return playerTurn;
 	}
 
-	public void setPlayerTurn(String playerTurn)
+	public void setPlayerTurn(int playerTurn)
 	{
 		this.playerTurn = playerTurn;
 	}
