@@ -7,6 +7,10 @@ import javax.swing.*;
 
 public class MainGUI extends JFrame {
 
+public static String username1;
+public static String username2;
+
+
 
 	public MainGUI() {
 		//Set JPanel
@@ -29,7 +33,10 @@ public class MainGUI extends JFrame {
 		setTitle("Game Environment");
 		setSize(500,500);
 		setLocationRelativeTo(null);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
+
 	}
 	private JButton addGameButton(String game, int y, GameView gameview) {
 		JButton checkersButton = new JButton(game);
@@ -87,8 +94,8 @@ public class MainGUI extends JFrame {
 		        if (s.equals("submit")) { 
 		        	MainGUI main = new MainGUI();
 		    		main.setVisible(true);
-		        }
-		    		
+		    		username1=buttonListener12.t.getText();
+		    		username2=buttonListener12.t1.getText();
 //		            // set the text of the label to the text of the field 
 //		            l.setText( buttonListener12.t.getText()); 
 //		  
@@ -96,37 +103,33 @@ public class MainGUI extends JFrame {
 //		            buttonListener12.t.setText("  "); 
 //			// TODO Auto-generated method stub
 //	
-			}
-	
+	}
 
+		}
 	public static void method() {
 
 		buttonListener12.f=new JFrame("Text");
 		buttonListener12.l=new JLabel("Player 1 Username:");
 		buttonListener12.l1=new JLabel("Player 2 Username:");
-		//JLabel label1=new JLabel("Player 2 Username:");
 		buttonListener12.b=new JButton("submit");
 		buttonListener12 here =new buttonListener12();
 		buttonListener12.b.addActionListener(here);
 		buttonListener12.t=new JTextField(16);
 		buttonListener12.t1=new JTextField(16);
-		//JTextField text1=new JTextField(16);
 		JPanel p=new JPanel();
 		p.add(buttonListener12.l);
 		p.add(buttonListener12.t);
 		p.add(buttonListener12.l1);
 		p.add(buttonListener12.t1);
 		p.add(buttonListener12.b);
-		//p.add(label1);
-		//p.add(buttonListener12.l);
-		//p.add();
+
 
 		buttonListener12.f.add(p);
 		buttonListener12.f.setSize(400, 400);
 
 		buttonListener12.f.show();
+		
 
-       // return text.getText();
 	}
 
 	/**
@@ -145,6 +148,5 @@ public class MainGUI extends JFrame {
 	 */
 
 	}
-
-
 }
+

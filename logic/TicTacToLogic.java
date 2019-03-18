@@ -25,9 +25,7 @@ public abstract class TicTacToLogic implements GameLogic {
 	public static int scorePlayer2=0;
 
 
-
-
-	public static class buttonListener extends JButton implements ActionListener
+public static class buttonListener extends JButton implements ActionListener
 	    {
 
 		 public buttonListener() {
@@ -44,7 +42,6 @@ public abstract class TicTacToLogic implements GameLogic {
 
 
 	    	public String findWinner(ActionEvent action){
-	    		System.out.println("INSIDE FIND WINNER");
 	    		if(checkDiagonalWin()  == true || checkVerticalWin()==true || checkHorizontalWin()==true)
 	            {
 	    				if (turn =="Player 1") {
@@ -146,18 +143,15 @@ public abstract class TicTacToLogic implements GameLogic {
 
 
 
-
 	
 	public static <T> ArrayList<?> findValidMove(int row, int col, TicTacToGameState gameState){
 		TicTacToGameState tictacgame=(TicTacToGameState) gameState;
-		//ArrayList<T> validMoves=new ArrayList<T>();
 		
 		if (tictacview.buttons[row].getText().equals(tictacview.buttons[col].getText()) 
 				&& !tictacview.buttons[row].getText().equals("")) {
 			int[] newMove=new int[2];
 			tictacgame.validMoves.add((int[]) newMove);
 		}
-		System.out.println("VALID MOVES NEW "+ tictacgame.validMoves);
 		return tictacgame.validMoves;
 		
 
@@ -179,42 +173,11 @@ public abstract class TicTacToLogic implements GameLogic {
 	} // new added
 
 
-
-
-
-
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	@Override
 	public boolean checkValidMove(JButton button) {
 		buttonListener here=new buttonListener();
 
 		return false;
 	} // can take out later
-//
-//	@Override
-//	public boolean isValidMove(int row, int col, GameState gameState) {
-//		// TODO Auto-generated method stub
-//		return false;
-//	}
 
-//	@Override
-//	public String getButtonClicked() {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
 }
