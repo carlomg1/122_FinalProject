@@ -66,8 +66,8 @@ public class CheckersGameState implements GameState{
 					this.checkerBoard[this.currentChecker[0]][this.currentChecker[1]]=null;
 					for (int[] move : this.flipPieces){
 						this.checkerBoard[move[0]][move[1]]=null;
-						if (this.playerTurn==-1) this.playerOneCount-=1;
-						else this.playerTwoCount-=1;
+						if (this.playerTurn==-1) this.playerTwoCount-=1;
+						else this.playerOneCount-=1;
 					}
 				}else{
 					this.checkerBoard[x][y]=this.checkerBoard[this.currentChecker[0]][this.currentChecker[1]];
@@ -94,7 +94,10 @@ public class CheckersGameState implements GameState{
 		this.playerTurn = this.playerTurn==1? -1: 1;
 	}
 	
-	public void gameLoop(){} // what is this
+	public int gameLoop(int x, int y){
+		this.update( x, y);
+		return this.checkerLogic.findWinner(this);
+	} // what is this
 	
 	public int getPlayerTurn()
 	{
@@ -128,6 +131,10 @@ public class CheckersGameState implements GameState{
 
 	public int returnPlayer( Checker checker){
 		return checker.player;
+	}
+	
+	public boolean isKing( Checker checker){
+		return checker.isKing;
 	}
 	
 	class Checker{

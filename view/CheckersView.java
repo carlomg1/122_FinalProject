@@ -19,6 +19,8 @@ public class CheckersView implements GameView {
 	public Board boardGame;
 	public JFrame frame;
 	public JPanel panel;
+	public JPanel scoreboard;
+	public JLabel score;
 	public JButton[][] buttons;
 	public CheckersGameState GameState;
 	
@@ -52,16 +54,29 @@ public class CheckersView implements GameView {
 		// TODO Auto-generated method stub
 		this.frame = new JFrame ("Checkers");
 		this.frame.setDefaultCloseOperation (JFrame.DISPOSE_ON_CLOSE);
-
+		
 		this.panel = new JPanel(); //creating a panel with a box like a checker board
 		this.panel.setLayout(new GridLayout(8, 8));
 		this.panel.setBorder (BorderFactory.createLineBorder (Color.red, 8));
 		this.panel.setBackground (Color.white);
 		
-		this.frame.getContentPane().add(panel);
-		this.frame.pack();
+		this.scoreboard = new JPanel();
+		this.scoreboard.setLayout(new FlowLayout());
+		this.scoreboard.setBorder(BorderFactory.createLineBorder (Color.black, 4));
+		this.scoreboard.setBackground (Color.white);
+		
+		JSplitPane splitPane = new JSplitPane();
+		splitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);  // we want it to split the window verticaly
+        splitPane.setDividerLocation(100);                    // the initial position of the divider is 200 (our window is 400 pixels high)
+        splitPane.setTopComponent(this.scoreboard);                  // at the top we want our "topPanel"
+        splitPane.setBottomComponent(this.panel);
+		
+		this.score =new JLabel();
+		
+		this.frame.getContentPane().add(splitPane);
+		//this.frame.pack();
 		this.frame.setVisible(true);
-		this.frame.setSize(500, 500);
+		this.frame.setSize(500, 625);
 		
 	}
 
@@ -77,6 +92,16 @@ public class CheckersView implements GameView {
 	@Override
 	public void updateBoard() {
 		// TODO Auto-generated method stub
+		
+		this.scoreboard.removeAll();
+		this.scoreboard.revalidate();
+		this.scoreboard.repaint();
+		
+		String currentPlayer = (this.GameState.getPlayerTurn()==-1)?"Player One":"Player Two";
+		this.score.setText("Black (Player One): " + Integer.toString(this.GameState.playerOneCount) + 
+			"    Red (Player Two): " + Integer.toString(this.GameState.playerTwoCount) + 
+			"    Turn: " + currentPlayer);
+		this.scoreboard.add(score);
 
 		this.panel.removeAll();
 		this.panel.revalidate();
@@ -91,7 +116,12 @@ public class CheckersView implements GameView {
 			}
 			for (int j =0; j<8; ++j){ 
 				if (GameState.checkerBoard[i][j] != null && GameState.returnPlayer(GameState.checkerBoard[i][j])==-1){
-					final JButton button = new JButton(new CircleIconBlack());
+					final JButton button;
+					if (GameState.isKing(GameState.checkerBoard[i][j])){
+						button = new JButton(new CheckerIcon(Color.blue));
+					}else {
+						button = new JButton(new CheckerIcon(Color.black));
+					}
 					button.setBackground(Color.gray);
 					button.setForeground(Color.gray);
 					button.setOpaque(true);
@@ -101,7 +131,12 @@ public class CheckersView implements GameView {
 					this.panel.add(button);
 					black = false;
 				}else if (GameState.checkerBoard[i][j] != null && GameState.returnPlayer(GameState.checkerBoard[i][j])==1){
-					final JButton button = new JButton(new CircleIconRed());
+					final JButton button;
+					if (GameState.isKing(GameState.checkerBoard[i][j])){
+						button = new JButton(new CheckerIcon(Color.orange));
+					}else {
+						button = new JButton(new CheckerIcon(Color.red));
+					}
 					button.setBackground(Color.gray);
 					button.setForeground(Color.gray);
 					button.setOpaque(true);
@@ -141,7 +176,7 @@ public class CheckersView implements GameView {
 		
 		for (int[] move : validMoves){
 			if (move.length == 2){
-				final JButton button = new JButton( new ValidMoveIcon());
+				final JButton button = new JButton( new CheckerIcon(Color.white));
 				button.setBackground(Color.darkGray);
 				button.setForeground(Color.darkGray);
 				button.setOpaque(true);
@@ -170,64 +205,19 @@ public class CheckersView implements GameView {
 		}
 	}
 	
-	class CircleIconBlack implements Icon {
-		  @Override
-		  public void paintIcon(Component c, Graphics g, int x, int y) {
-			  
-		    Graphics2D g2 = (Graphics2D) g.create();
-		    //Draw the icon at the specified x, y location:
-		    g2.drawOval(8, 8, c.getWidth()-16, c.getHeight()-16);
-		    
-		    g2.setColor(Color.black);
-		    g2.setBackground(Color.gray);
-		    
-		    g2.fillOval(8, 8, c.getWidth()-16, c.getHeight()-16);
-		    g2.dispose();
-		  }
-
-		  @Override
-		  public int getIconWidth() {
-		    return 30;
-		  }
-		  @Override
-		  public int getIconHeight() {
-		    return 30;
-		  }
+	class CheckerIcon implements Icon {
+		
+		Color iconColor;
+		CheckerIcon(Color cc){
+			this.iconColor = cc;
 		}
-	
-	class CircleIconRed implements Icon {
-		  @Override
-		  public void paintIcon(Component c, Graphics g, int x, int y) {
-		    //g.drawOval(10, 10, 20, 20);
-		    Graphics2D g2 = (Graphics2D) g.create();
-		    //Draw the icon at the specified x, y location:
-		    //g2.drawOval(1, 1, c.getWidth()-3, c.getHeight()-3);
-		    g2.setColor(Color.red);
-		    g2.fillOval(8, 8, c.getWidth()-16, c.getHeight()-16);
-		    //or
-		    //g2.translate(x, y);
-		    //g2.drawOval(0, 0, getIconWidth() - 1, getIconHeight() - 1);
-		    g2.dispose();
-		  }
-
-		  @Override
-		  public int getIconWidth() {
-		    return 30;
-		  }
-		  @Override
-		  public int getIconHeight() {
-		    return 30;
-		  }
-		}
-	
-	class ValidMoveIcon implements Icon {
 		  @Override
 		  public void paintIcon(Component c, Graphics g, int x, int y) {
 		    //g.drawOval(10, 10, 20, 20);
 		    Graphics2D g2 = (Graphics2D) g.create();
 		    //Draw the icon at the specified x, y location:
 		    g2.drawOval(1, 1, c.getWidth()-3, c.getHeight()-3);
-		    g2.setColor(Color.white);
+		    g2.setColor(this.iconColor);
 		    g2.fillOval(8, 8, c.getWidth()-16, c.getHeight()-16);
 		    g2.dispose();
 		  }
@@ -259,15 +249,41 @@ public class CheckersView implements GameView {
 			
 			if (this.position!=null && this.checkerView.GameState.checkerBoard[this.position[0]][this.position[1]]!=null){
 				this.checkerView.updateBoard();
-				this.checkerView.GameState.update(this.position[0], this.position[1]);
+				this.checkerView.GameState.gameLoop(this.position[0], this.position[1]);
 				if (this.checkerView.GameState.validMoves!=null && this.checkerView.GameState.currentChecker!=null){
 					this.checkerView.drawValidMove(this.checkerView.GameState.validMoves);
 				}
 			} else if (this.position!=null && this.checkerView.GameState.checkerBoard[this.position[0]][this.position[1]]==null){
-				this.checkerView.GameState.update(this.position[0], this.position[1]);
+				int winnerState = this.checkerView.GameState.gameLoop(this.position[0], this.position[1]);
 				this.checkerView.updateBoard();
+				this.determineWinner(winnerState);
+				
+				
 			}
+			
         }
+		
+		private void determineWinner( int winnerState) {
+			if(winnerState != 0) {
+				String winPlayer = (winnerState==-1)?"Player Two":"Player One";
+				int answer=JOptionPane.showConfirmDialog(null, winPlayer 
+				+ " wins the game!  Do you want to play again?","",JOptionPane.YES_NO_OPTION);
+				
+	            if(answer==JOptionPane.NO_OPTION){
+					System.exit(0);
+					}
+
+	            if(answer==JOptionPane.YES_OPTION) { // if the user want to play again clear all the button and start over
+	            	resetGame();
+	            }
+			}
+		}
+		
+		private void resetGame() {
+			this.checkerView.GameState = new CheckersGameState();
+			this.checkerView.startGame();
+		}
+		
 		public int[] checkerPosition(ActionEvent e) {
 			JButton button = (JButton) e.getSource();
 			int[] result = new int[2];
@@ -279,6 +295,7 @@ public class CheckersView implements GameView {
 	         
 	                	result[0] = i;
 	                	result[1] = j; 
+	                	
 	                	
 		                return result;
 	                }
