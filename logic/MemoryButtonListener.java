@@ -92,6 +92,7 @@ public class MemoryButtonListener extends JButton implements ActionListener
 	    		
 	    		//Check if the game is over here
 	    		if(MemoryLogic.checkFinish(MemoryView.buttons)) {
+	    			MemoryView.UpdateScore();
 	    			System.out.println("GAME OVER!");
 	    			System.out.println("Player 1 got " + MemoryLogic.player1Score + " pairs!");
 	    			System.out.println("Player 2 got " + MemoryLogic.player2Score + " pairs!");
@@ -125,6 +126,7 @@ public class MemoryButtonListener extends JButton implements ActionListener
 	    		
 	    		
 	    	}
+	    	MemoryView.UpdateScore();
 	    		
 	    	
 	    }

@@ -21,7 +21,7 @@ public class MemoryLogic implements GameLogic {
 	public static int player1Score = 0;
 	public static int player2Score = 0;
 	public static MemoryButtonListener previousButton = null;
-	
+	public static JLabel score;
 	
 	
 	@Override
