@@ -101,7 +101,7 @@ public class MainGUI extends JFrame {
 //			// TODO Auto-generated method stub
 //	
 			}
-	}
+
 
 	public static void method() {
 
@@ -147,6 +147,7 @@ public class MainGUI extends JFrame {
 	 * @param y specifies the y pos of the button
 	 * @return a new JButton created
 	 */
-  }
-}
 
+  }
+
+}
