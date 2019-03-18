@@ -73,7 +73,7 @@ public class MemoryView implements GameView {
 		ChangeButtonBorders(true);
 		
 		//CREATE A TIMER SO THAT ALL NUMS ARE SET TO BE HIDDEN AFTER SOME TIME AFTER STARTUP
-		Timer timer = new Timer(5000, new ActionListener() {
+		Timer timer = new Timer(3000, new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				for(int x = 0; x < BOARD_ROWS; x++) {
 					for(int y = 0; y < BOARD_COLS; y++) {
