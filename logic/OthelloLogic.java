@@ -17,7 +17,7 @@ public class OthelloLogic implements GameLogic {
 		gamestate.board[4][4] = gamestate.black;
 	}
 	
-
+	
 	public void handleMove(int x, int y, OthelloGameState gamestate) {
 		ArrayList<Tuple> validMoves = (ArrayList<Tuple>) findValidMove(x,y, gamestate);
 		flipTiles(validMoves, gamestate);
@@ -29,7 +29,8 @@ public class OthelloLogic implements GameLogic {
 		ArrayList<Tuple> validMoves = new ArrayList<Tuple>();
 		ArrayList<Tuple> directions = new ArrayList<Tuple>();
 		directions.add(new Tuple(-1, 0));
-		directions.add(new Tuple(1, 0));
+		directions.add(new Tuple(
+				1, 0));
 		directions.add(new Tuple(0, -1));
 		directions.add(new Tuple(0, 1));
 		directions.add(new Tuple(1, 1));
@@ -38,9 +39,12 @@ public class OthelloLogic implements GameLogic {
 		directions.add(new Tuple(-1, -1));
 		
 		for(Tuple coords : directions) {
-			if(isValidMove(row + coords.x, col + coords.y, gameState)) {
+			if(isValidMove(row + coords.x, col + coords.y, gameState) && othelloGameState.board[row][col] == othelloGameState.none) {
 				validMoves.addAll(checkDirections(row, col, othelloGameState, 
 						new ArrayList<Tuple>(), coords.x, coords.y));
+			}
+			else {
+				System.out.println("NOT A VALID MOVE");
 			}
 		}
 		return validMoves;
@@ -116,6 +120,12 @@ public class OthelloLogic implements GameLogic {
 	}
 
 	public void switchTurns(OthelloGameState gamestate) {
+		if(gamestate.turnString == "black") {
+			gamestate.turnString = "white";
+		}
+		else {
+			gamestate.turnString = "black";
+		}
 		gamestate.playerTurn = getOppositeTurn(gamestate);
 	}
 	

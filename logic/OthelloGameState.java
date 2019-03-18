@@ -12,6 +12,7 @@ public class OthelloGameState implements GameState{
 	public int none;
 	public int black;
 	public int white;
+	public String turnString;
 	public int[][] board;
 	OthelloLogic othelloLogic;
 	
@@ -22,6 +23,7 @@ public class OthelloGameState implements GameState{
 		none = 0;
 		black = 1;
 		white = 2;
+		turnString = "black";
 		board = new int[8][8];
 		playerTurn = black;
 		othelloLogic = new OthelloLogic();

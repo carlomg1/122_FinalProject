@@ -17,8 +17,8 @@ public class OthelloView implements GameView {
 	public Board boardGame;
 	public JFrame jframe = new JFrame();
 	public JPanel panel;
-	public JLabel player1Score;
-	public JLabel player2Score;
+	public JPanel scoreboard;
+	public JLabel score;
 	public int numberButtons;
 	public JButton buttons[][];
 	public OthelloGameState othelloGameState;
@@ -26,10 +26,17 @@ public class OthelloView implements GameView {
 	public OthelloView() {
 		//Set JPanel
 		panel = new JPanel();
+		scoreboard = new JPanel();
+		JSplitPane splitPane = new JSplitPane();
+		splitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);  // we want it to split the window verticaly
+        splitPane.setDividerLocation(100);                    // the initial position of the divider is 200 (our window is 400 pixels high)
+        splitPane.setTopComponent(scoreboard);                  // at the top we want our "topPanel"
+        splitPane.setBottomComponent(panel);
 		panel.setBorder (BorderFactory.createLineBorder (Color.black, 8));
 		panel.setBackground (Color.GREEN);
-		jframe.getContentPane().add(panel);
-		panel.setLayout(null);
+		scoreboard.setBorder (BorderFactory.createLineBorder (Color.black, 8));
+		scoreboard.setBackground (Color.GREEN);
+		jframe.getContentPane().add(splitPane);
 		
 		//Initialize environment
 		jframe.setTitle("Othello");
@@ -44,8 +51,7 @@ public class OthelloView implements GameView {
 		othelloGameState = new OthelloGameState();
 		
 		//Scoreboard
-		player1Score = new JLabel();
-		player2Score = new JLabel();
+		score = new JLabel();
 	}
 
 	@Override
@@ -59,7 +65,8 @@ public class OthelloView implements GameView {
 
 	@Override
 	public void layoutGrid() {
-		panel.setLayout (new GridLayout (8, 8));	
+		panel.setLayout (new GridLayout (8, 8));
+		scoreboard.setLayout(new FlowLayout());
 		updateBoard();
 	}
 
@@ -111,11 +118,9 @@ public class OthelloView implements GameView {
 				}
 			}
 		}
-//		player1Score.setText("Black (Player 1): " + Integer.toString(othelloGameState.player1Total));
-//		player2Score.setText("White (Player 2): "+ Integer.toString(othelloGameState.player2Total));
-//		panel.add(player1Score);
-//		panel.add(player2Score);
-		
+		score.setText("Black (Player 1): " + Integer.toString(othelloGameState.player1Total) + 
+				"    White (Player 2): " + Integer.toString(othelloGameState.player2Total) + "    Turn: " + othelloGameState.turnString);
+		scoreboard.add(score);
 	}
 	
 	private class ButtonListener extends JButton implements ActionListener
