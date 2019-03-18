@@ -10,7 +10,7 @@ public class MemoryGameState{
 	
 	private String player1;
 	private String player2;
-	private int playerTurn;
+	public int playerTurn;
 	private int p1Score;
 	private int p2Score;
 	private Map<Integer, Integer> possibleNums;
@@ -37,9 +37,8 @@ public class MemoryGameState{
 				revealedSpace[x][y] = false;
 			}
 		}
-		InitializePossibleNums();
 		hiddenNumbers = new int[BOARD_ROWS][BOARD_COLS];
-		InitializeHiddenNums();
+		hiddenNumbers = MemoryLogic.InitializeHiddenNums();
 		
 	}
 	
@@ -93,4 +92,7 @@ public class MemoryGameState{
 	private int GetUpperBound() {
 		return (BOARD_ROWS * BOARD_COLS) / 2;
 	}
+	public void update(int x, int y){
+		
+	} // from interface
 }

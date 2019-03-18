@@ -70,6 +70,8 @@ public class MemoryView implements GameView {
 		frame.setVisible(true);
 		frame.setSize(1280, 720);
 		
+		ChangeButtonBorders(true);
+		
 		//CREATE A TIMER SO THAT ALL NUMS ARE SET TO BE HIDDEN AFTER SOME TIME AFTER STARTUP
 		Timer timer = new Timer(5000, new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
@@ -92,6 +94,22 @@ public class MemoryView implements GameView {
 				buttons[x][y].setEnabled(enableOrDisable);
 			}
 		}		
+	}
+
+	//Changes the button borders depending on whose turn it is
+	//Player 1 is Blue
+	//Player 2 is Red
+	public static void ChangeButtonBorders(boolean isPlayer1Turn) {
+		for(int x = 0; x < BOARD_ROWS; x++) {
+			for(int y = 0; y < BOARD_COLS; y++) {
+				if(isPlayer1Turn) {
+					buttons[x][y].setBorder(BorderFactory.createLineBorder(Color.blue));	
+				}
+				else {
+					buttons[x][y].setBorder(BorderFactory.createLineBorder(Color.red));
+				}	
+			}
+		}	
 	}
 	
 	@Override

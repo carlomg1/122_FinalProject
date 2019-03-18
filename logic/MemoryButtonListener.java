@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
 public class MemoryButtonListener extends JButton implements ActionListener
 {
@@ -49,7 +50,8 @@ public class MemoryButtonListener extends JButton implements ActionListener
 	    			
 	    			//Matched correctly, update score
 	    			if(MemoryLogic.isMatch(this)) {
-	    				
+	    			
+	    				MemoryLogic.previousButton = null;
 	    			}
 	    			
 	    			//Wrong choice, hide both spaces now
@@ -60,11 +62,26 @@ public class MemoryButtonListener extends JButton implements ActionListener
 	    				
 	    				MemoryView.HideOrRevealSpace(MemoryLogic.previousButton.row, MemoryLogic.previousButton.column, false);
 	    				MemoryView.HideOrRevealSpace(row, column, false);
+	    				//Prevent User from clicking anymore
+	    				MemoryView.EnableOrDisableButtons(false);
+	    				
+	    				//Wait a second before hiding the pair again and letting the user click again
+	    				Timer timer = new Timer(1000, new ActionListener() {
+	    					public void actionPerformed(ActionEvent event) {
+	    	    				MemoryView.HideOrRevealSpace(MemoryLogic.previousButton.row, MemoryLogic.previousButton.column, false);
+	    	    				MemoryView.HideOrRevealSpace(row, column, false);
+	    	    				MemoryView.EnableOrDisableButtons(true);
+	    	    				MemoryLogic.previousButton = null;
+	    	    				
+	    	    				MemoryLogic.changeTurn();
+	    	    				MemoryView.ChangeButtonBorders(MemoryLogic.isPlayer1Turn);
+	    					}
+	    				});
+	    				timer.setRepeats(false);
+	    				timer.start();
 	    			}
-	    			MemoryLogic.previousButton = null;
 	    		}
-	    		
-	    		//Check if the game is over
+	    		//Check if the game is over here
 	    		
 	    		
 	    	}
