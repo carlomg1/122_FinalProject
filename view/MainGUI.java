@@ -1,4 +1,3 @@
-
 package view;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -88,8 +87,10 @@ public class MainGUI extends JFrame {
 		        if (s.equals("submit")) { 
 		        	MainGUI main = new MainGUI();
 		    		main.setVisible(true);
+
 		    		username1 = buttonListener12.t.getText();
 		    		username2 = buttonListener12.t1.getText();
+
 		        }
 		    		
 //		            // set the text of the label to the text of the field 
@@ -146,6 +147,6 @@ public class MainGUI extends JFrame {
 	 * @param y specifies the y pos of the button
 	 * @return a new JButton created
 	 */
-
+  }
 }
 
