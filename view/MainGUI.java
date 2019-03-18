@@ -5,7 +5,8 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 public class MainGUI extends JFrame {
-
+	public static String username1;
+	public static String username2;
 
 	public MainGUI() {
 		//Set JPanel
@@ -54,7 +55,7 @@ public class MainGUI extends JFrame {
 	 */
 	public static void main (String[] args) {
 		buttonListener12 again=new buttonListener12();
-		again.method();
+		method();
 		//method();
 		//Start the MainGUI
 //		MainGUI main = new MainGUI();
@@ -86,6 +87,10 @@ public class MainGUI extends JFrame {
 		        if (s.equals("submit")) { 
 		        	MainGUI main = new MainGUI();
 		    		main.setVisible(true);
+
+		    		username1 = buttonListener12.t.getText();
+		    		username2 = buttonListener12.t1.getText();
+
 		        }
 		    		
 //		            // set the text of the label to the text of the field 
@@ -95,6 +100,7 @@ public class MainGUI extends JFrame {
 //		            buttonListener12.t.setText("  "); 
 //			// TODO Auto-generated method stub
 //	
+			}
 	}
 
 	public static void method() {
@@ -141,6 +147,6 @@ public class MainGUI extends JFrame {
 	 * @param y specifies the y pos of the button
 	 * @return a new JButton created
 	 */
-
-	}
+  }
 }
+

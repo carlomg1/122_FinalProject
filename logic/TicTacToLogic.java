@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -159,5 +159,23 @@ public class TicTacToLogic implements GameLogic {
 
 		return false;
 	}
+	
+	public ArrayList<?> findValidMove(int row, int col, GameState gameState){
+		return null;
+	} // new added
 
+	public boolean isValidMove(int row, int col, GameState gameState){
+		return false;
+	} // new added
+	
+	
+	public boolean checkValidMove(ArrayList<?> validMoves, GameState gstate){
+		return false;
+	} // new added
+
+//	@Override
+//	public String getButtonClicked() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 }
