@@ -20,10 +20,10 @@ import javax.swing.Timer;
 public class MemoryView implements GameView {
 	private static final int BOARD_ROWS = 4;
 	private static final int BOARD_COLS = 4;
-	private static MemoryButtonListener buttons[][] = new MemoryButtonListener[BOARD_ROWS][BOARD_COLS];
-	private String player1;
-	private String player2;
-	MemoryGameState currentState;
+	public static MemoryButtonListener buttons[][] = new MemoryButtonListener[BOARD_ROWS][BOARD_COLS];
+	private static String player1;
+	private static String player2;
+	static MemoryGameState currentState;
 
 	
 	
@@ -110,6 +110,36 @@ public class MemoryView implements GameView {
 				}	
 			}
 		}	
+	}
+	
+	public static void Reset() {
+		MemoryLogic.player1Score = 0;
+		MemoryLogic.player2Score = 0;
+		MemoryLogic.isPlayer1Turn = true;
+		
+		currentState = new MemoryGameState(player1, player2);
+		for(int x = 0; x < BOARD_ROWS; x++) {
+			for(int y = 0; y < BOARD_COLS; y++) {
+				buttons[x][y].ChangeValue(currentState.GetValue(x, y));
+				buttons[x][y].setText(Integer.toString(buttons[x][y].GetValue()));	
+				buttons[x][y].setEnabled(false);
+				buttons[x][y].revealed = false;
+			}
+		}
+		ChangeButtonBorders(MemoryLogic.isPlayer1Turn);
+		Timer timer = new Timer(3000, new ActionListener() {
+			public void actionPerformed(ActionEvent event) {
+				for(int x = 0; x < BOARD_ROWS; x++) {
+					for(int y = 0; y < BOARD_COLS; y++) {
+						buttons[x][y].setText("");
+						buttons[x][y].setEnabled(true);
+					}
+				}
+			}
+		});
+		timer.setRepeats(false);
+		timer.start();
+		
 	}
 	
 	@Override

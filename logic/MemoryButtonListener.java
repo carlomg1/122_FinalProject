@@ -31,7 +31,12 @@ public class MemoryButtonListener extends JButton implements ActionListener
 		 this.setEnabled(false);
 	 	}
 	 
-    public void actionPerformed(ActionEvent action) 
+	 
+	public void ChangeValue(int v) {
+		value = v;
+	}
+	 
+	public void actionPerformed(ActionEvent action) 
 	    {
 	    	MemoryLogic rules = new MemoryLogic();
 	    	// Valid move, user clicked on a button that has not been revealed yet
@@ -50,6 +55,7 @@ public class MemoryButtonListener extends JButton implements ActionListener
 	    			
 	    			//Matched correctly, update score
 	    			if(MemoryLogic.isMatch(this)) {
+	    				//UPDATES SCORE
 	    				if(MemoryLogic.isPlayer1Turn) {
 	    					MemoryLogic.player1Score++;
 	    				}
@@ -57,7 +63,7 @@ public class MemoryButtonListener extends JButton implements ActionListener
 	    					MemoryLogic.player2Score++;
 	    				}
 	    				
-	    				
+	    				//User finished clicked a pair now, set previous button back to null
 	    				MemoryLogic.previousButton = null;
 	    			}
 	    			
@@ -82,7 +88,40 @@ public class MemoryButtonListener extends JButton implements ActionListener
 	    				timer.start();
 	    			}
 	    		}
+	    		
+	    		
 	    		//Check if the game is over here
+	    		if(MemoryLogic.checkFinish(MemoryView.buttons)) {
+	    			System.out.println("GAME OVER!");
+	    			System.out.println("Player 1 got " + MemoryLogic.player1Score + " pairs!");
+	    			System.out.println("Player 2 got " + MemoryLogic.player2Score + " pairs!");
+	    			
+	    			boolean isTie = false;
+	    			if(MemoryLogic.player1Score == MemoryLogic.player2Score) {
+	    				isTie = true;
+	    			}
+	    			
+	    			int answer;
+	    			if(isTie) {
+	    				answer=JOptionPane.showConfirmDialog(null, "This game is a tie!\nDo you want to play again?","",JOptionPane.YES_NO_OPTION);
+
+	    			}
+	    			else {
+	    				String winner = MemoryLogic.player1Score > MemoryLogic.player2Score ? "Player 1" : "Player 2";
+	    				answer=JOptionPane.showConfirmDialog(null, winner + " wins the game!  Do you want to play again?","",JOptionPane.YES_NO_OPTION);
+	    			}
+	    			
+	                //Exit here, user doesn't want to play again
+	    			if(answer==JOptionPane.NO_OPTION){
+	    				System.exit(0);
+    				}
+
+	                if(answer==JOptionPane.YES_OPTION) { // if the user want to play again clear all the button and start over
+	                	//Start over
+	                	MemoryLogic.previousButton = null;
+	                	MemoryView.Reset();
+}
+	    		}
 	    		
 	    		
 	    	}
