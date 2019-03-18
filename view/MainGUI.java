@@ -6,7 +6,8 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 public class MainGUI extends JFrame {
-
+	public static String username1;
+	public static String username2;
 
 	public MainGUI() {
 		//Set JPanel
@@ -87,6 +88,8 @@ public class MainGUI extends JFrame {
 		        if (s.equals("submit")) { 
 		        	MainGUI main = new MainGUI();
 		    		main.setVisible(true);
+		    		username1 = buttonListener12.t.getText();
+		    		username2 = buttonListener12.t1.getText();
 		        }
 		    		
 //		            // set the text of the label to the text of the field 

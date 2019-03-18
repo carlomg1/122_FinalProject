@@ -3,12 +3,14 @@ package logic;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Hashtable;
 
 import javax.swing.*;
 
 import view.MainGUI;
 
 public class OthelloLogic implements GameLogic {
+
 	
 	public void initializeBoard(OthelloGameState gamestate) {
 		gamestate.board[3][3] = gamestate.black;
@@ -19,9 +21,23 @@ public class OthelloLogic implements GameLogic {
 	
 	
 	public void handleMove(int x, int y, OthelloGameState gamestate) {
+		
 		ArrayList<Tuple> validMoves = (ArrayList<Tuple>) findValidMove(x,y, gamestate);
 		flipTiles(validMoves, gamestate);
 		calculateScores(gamestate);
+	}
+	
+	public boolean searchAllValidMoves(OthelloGameState gamestate){
+		Hashtable<Tuple,ArrayList<Tuple>> validFlipSequence = new Hashtable<Tuple,ArrayList<Tuple>>();
+		for (int i = 0; i < gamestate.board.length; i++){
+			for (int j = 0; j < gamestate.board[i].length; j++){
+				ArrayList<Tuple> validMoves = (ArrayList<Tuple>) findValidMove(i,j, gamestate);
+				if (!validMoves.isEmpty()){
+					validFlipSequence.put(new Tuple(i,j), validMoves);
+				}
+			}
+		}
+		return validFlipSequence.isEmpty();
 	}
 	
 	public ArrayList<?> findValidMove(int row, int col, GameState gameState){
@@ -44,7 +60,6 @@ public class OthelloLogic implements GameLogic {
 						new ArrayList<Tuple>(), coords.x, coords.y));
 			}
 			else {
-				System.out.println("NOT A VALID MOVE");
 			}
 		}
 		return validMoves;
@@ -142,6 +157,25 @@ public class OthelloLogic implements GameLogic {
 				}
 			}
 		}
+	}
+	
+	public void findWinner(OthelloGameState gamestate) {
+		if(gamestate.player1Total > gamestate.player2Total) {
+			System.out.println("Black wins!");
+			gamestate.winner = gamestate.black;
+			gamestate.winnerString = "Black";
+		}
+		else if (gamestate.player2Total > gamestate.player1Total) {
+			System.out.println("White wins!");
+			gamestate.winner = gamestate.black;
+			gamestate.winnerString = "White";
+		}
+		else {
+			System.out.println("Draw!");
+			gamestate.winner = gamestate.none;
+			gamestate.winnerString = "Draw";
+		}
+		
 	}
 	
 	//Taken from stackoverflow

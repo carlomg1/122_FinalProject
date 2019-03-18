@@ -13,6 +13,7 @@ public class OthelloGameState implements GameState{
 	public int black;
 	public int white;
 	public String turnString;
+	public String winnerString = "None";
 	public int[][] board;
 	OthelloLogic othelloLogic;
 	
@@ -35,8 +36,26 @@ public class OthelloGameState implements GameState{
 	}//from interface
 	
 	public void update(int x, int y){
-		othelloLogic.handleMove(x,y, this);
-		othelloLogic.switchTurns(this);
+		if(!othelloLogic.findValidMove(x,y,this).isEmpty()) {
+			othelloLogic.handleMove(x,y, this);
+			othelloLogic.switchTurns(this);
+			if(!othelloLogic.searchAllValidMoves(this)) {
+				//continue
+			}
+			else {
+				othelloLogic.switchTurns(this);
+				if(othelloLogic.searchAllValidMoves(this)) {
+					System.out.println("GAME OVER");
+					othelloLogic.findWinner(this);
+					System.out.println(winnerString);
+					//find winner
+					//game over
+				}
+				else {
+					//continue
+				}
+			}
+		}
 	}//from interface
 	public void changeTurn(){
 		
