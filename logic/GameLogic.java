@@ -5,7 +5,7 @@ import java.util.*;
 
 interface GameLogic {
 	
-	public ArrayList<?> findValidMove(int row, int col, GameState gameState);
+	public <T>ArrayList<?> findValidMove(int row, int col, GameState gameState);
 
 	public boolean isValidMove(int row, int col, GameState gameState);
 	
