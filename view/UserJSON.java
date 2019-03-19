@@ -38,14 +38,8 @@ public class UserJSON {
 			    writeToFile();
 			}else{
 				fileExists = true;
-//				Object object = parser.parse(new FileReader(FILE_NAME));
-//				json = (JSONObject) object;
 				loadToJSON(user1, user2);
 				writeToFile();
-//				jsonArray = (JSONArray) parser.parse(new FileReader(FILE_NAME));
-//				loadToJSON(user1, user2);
-//				System.out.println(json);
-//				Iterator<String> iter = json.keys();
 //				read the json object from the file and call the load to json method.
 			}
 		}
@@ -59,7 +53,6 @@ public class UserJSON {
 	public void loadToJSON(String user1, String user2) throws FileNotFoundException, IOException, ParseException {
 		// check if the names are already in the JSON file, if not write to it.
 		// if it already exists, do the checking. 
-//		System.out.println("IN LOAD");
 
 		if(fileExists == true) { // if an entered user exists, do not add them to the profiles
 			Object object = parser.parse(new FileReader(FILE_NAME));
@@ -76,10 +69,10 @@ public class UserJSON {
 				for(String key: userDict.keySet()) {
 					if(user1.equals(key)) {
 						usersToAdd.remove(user1);
-						System.out.println("yepp1");
+//						System.out.println("yepp1");
 					}else if(user2.equals(key)) {
 						usersToAdd.remove(user1);
-						System.out.println("yepp2");
+//						System.out.println("yepp2");
 					}
 				}
 				i++;
@@ -98,7 +91,7 @@ public class UserJSON {
 				jsonArray.add(userDict);
 			}
 		}else { // in the case that there is no Json File nor contents within it. 
-			jsonArray = new JSONArray();
+			jsonArray = new JSONArray(); 
 			
 			// user1
 			HashMap<String, HashMap<String, Integer>> userDict1 = new HashMap<String, HashMap<String, Integer>>();
@@ -147,7 +140,27 @@ public class UserJSON {
 		System.out.println(jsonArray);
 	}
 	
-	public void jsonToArray() {
+	public ArrayList<ArrayList<String>> jsonToArray() {
+		System.out.println("In JsonToArray");
+		ArrayList<ArrayList<String>> profiles = new ArrayList<ArrayList<String>>();
+		
+		int i = 0;
+		
+		for(Object user: jsonArray) {
+			HashMap<String, HashMap<String, Integer>> userDict = (HashMap<String, HashMap<String, Integer>>) jsonArray.get(i);
+			ArrayList<String> inner = new ArrayList<String>();
+			for(String key: userDict.keySet()) {
+				inner.add(key);
+				HashMap<String, Integer> innerDict = (HashMap<String, Integer>) userDict.get(key);
+				for(String game: innerDict.keySet()) {
+					inner.add(String.valueOf(innerDict.get(game)));
+				}
+			}
+			profiles.add(inner);
+			i++;
+		}
+		System.out.println(profiles);
+		return profiles;
 		// grabs the json and reformats it into a 2d array for Tim to render
 	}
 
