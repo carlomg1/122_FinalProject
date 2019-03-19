@@ -1,5 +1,7 @@
 package logic;
 import view.MemoryView;
+import view.UserJSON;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -12,6 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
+import view.UserJSON;
 
 public class MemoryButtonListener extends JButton implements ActionListener
 {
@@ -19,6 +22,8 @@ public class MemoryButtonListener extends JButton implements ActionListener
 	 private int row;			//Row index its located in
 	 private int column;		//Col index its located in
 	 public boolean revealed;	//Whether this space has been revealed or not
+	 
+	 private static String GAME = "memory";
  
 	 public MemoryButtonListener(int x, int y, int numValue) {
 		 addActionListener(this); // allows button to be clickable and start performing the actions on it
@@ -110,6 +115,11 @@ public class MemoryButtonListener extends JButton implements ActionListener
 	    			else {
 	    				String winner = MemoryLogic.player1Score > MemoryLogic.player2Score ? "Player 1" : "Player 2";
 	    				answer=JOptionPane.showConfirmDialog(null, winner + " wins the game!  Do you want to play again?","",JOptionPane.YES_NO_OPTION);
+	    				if(winner == "Player 1") {
+	    					UserJSON.incrementScore(MemoryView.player1, GAME);
+	    				}else {
+	    					UserJSON.incrementScore(MemoryView.player2, GAME);
+	    				}
 	    			}
 	    			
 	                //Exit here, user doesn't want to play again

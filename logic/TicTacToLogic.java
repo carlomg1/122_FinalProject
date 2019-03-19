@@ -15,12 +15,16 @@ import javax.swing.JPanel;
 
 import view.MainGUI;
 import view.TicTacToeView;
+import view.UserJSON;
 
 public abstract class TicTacToLogic implements GameLogic {
 
 	static TicTacToGameState tictactoGameState= new TicTacToGameState();
 	public static TicTacToeView tictacview=new TicTacToeView();
 	public static HashMap<Integer, String> userMap = new HashMap<Integer, String>();
+	
+//	private static String GAME = "ttt";
+	
 	
 	TicTacToLogic(){
 
@@ -58,10 +62,12 @@ public static class TicTacToButton extends JButton implements ActionListener
 	            {
 	    				if (turn ==0) {
 	    					scorePlayer1++;
+	    					UserJSON.incrementScore(userMap.get(0), "ttt");
 	    					player1Score();
 	    				}
 	    				else {
 	    					scorePlayer2++;
+	    					UserJSON.incrementScore(userMap.get(1), "ttt");
 	    					player2Score();
 	    				}
 	    				
@@ -174,6 +180,7 @@ public static class TicTacToButton extends JButton implements ActionListener
     }
 
     public static HashMap usersMap() {
+    	System.out.println(MainGUI.username1);
 		userMap.put(turnPlayer1, MainGUI.username1);
 		userMap.put(turnPlayer2, MainGUI.username2);
 		return userMap;

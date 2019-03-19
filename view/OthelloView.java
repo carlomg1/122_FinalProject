@@ -15,8 +15,6 @@ public class OthelloView implements GameView {
 	public String Player1;
 	public String Player2;
 	
-	public Board boardGame;
-	
 	public JFrame jframe = new JFrame();
 	public JPanel panel;
 	public JPanel scoreboard;

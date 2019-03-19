@@ -15,7 +15,6 @@ import javax.swing.*;
 public class TicTacToeView implements GameView {
 	public static String Player1;
 	public String Player2;
-	public Board boardGame;
 	public JFrame frame;
 	public JPanel panel;
 	public JPanel scoreboard;

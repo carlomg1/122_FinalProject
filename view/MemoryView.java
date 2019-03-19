@@ -23,8 +23,8 @@ public class MemoryView implements GameView {
 	private static final int BOARD_ROWS = 4;
 	private static final int BOARD_COLS = 4;
 	public static MemoryButtonListener buttons[][] = new MemoryButtonListener[BOARD_ROWS][BOARD_COLS];
-	private static String player1;
-	private static String player2;
+	public static String player1;
+	public static String player2;
 	public static MemoryGameState currentState;
 	public static JFrame frame;
 	public static JPanel panel;
