@@ -37,12 +37,14 @@ public class MemoryView implements GameView {
 	public MemoryView(String p1, String p2) {
 		player1 = p1;
 		player2 = p2;
-		currentState = new MemoryGameState(p1, p2);
+		currentState = new MemoryGameState(player1, player2);
 	}
 
 	@Override
 	public void startGame() {
 		// TODO Auto-generated method stub
+		System.out.println("Player 1: " + player1);
+		System.out.println("Player 2: " + player2);
 		this.layoutGrid();
 	}
 

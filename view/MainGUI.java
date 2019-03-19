@@ -16,7 +16,7 @@ public class MainGUI extends JFrame {
 		
 		//Create buttons for each game
 		JButton checkersButton = addGameButton("Checkers", 70, new CheckersView());
-		JButton memoryButton = addGameButton("Memory", 150, new MemoryView("1", "2"));
+		JButton memoryButton = addGameButton("Memory", 150, new MemoryView(username1, username2));
 		JButton othelloButton = addGameButton("Othello", 230, new OthelloView());
 		JButton tictactoeButton = addGameButton("TicTacToe", 310, new TicTacToeView());
 
@@ -55,11 +55,11 @@ public class MainGUI extends JFrame {
 	 */
 	public static void main (String[] args) {
 		buttonListener12 again=new buttonListener12();
-		method();
+		again.method();
 		//method();
 		//Start the MainGUI
-//		MainGUI main = new MainGUI();
-//		main.setVisible(true);
+		MainGUI main = new MainGUI();
+		main.setVisible(true);
 	}
 	
 	
@@ -84,12 +84,12 @@ public class MainGUI extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			 String s = e.getActionCommand(); 
+			 
 		        if (s.equals("submit")) { 
-		        	MainGUI main = new MainGUI();
-		    		main.setVisible(true);
-
 		    		username1 = buttonListener12.t.getText();
 		    		username2 = buttonListener12.t1.getText();
+		        	MainGUI main = new MainGUI();
+		    		main.setVisible(true);
 
 		        }
 		    		
