@@ -6,6 +6,9 @@ import javax.swing.*;
 
 public class MainGUI extends JFrame {
 	
+	public static String username1;
+	public static String username2;
+	
 	static UserJSON userJson = new UserJSON();
 	LeaderBoardView leaderBoardView = new LeaderBoardView();
 	
@@ -99,8 +102,11 @@ public class MainGUI extends JFrame {
 	        if (s.equals("submit")) {
 	        	userJson.checkFile(userName1.getText(), userName2.getText());
 	        	userJson.jsonToArray();
+	        	username1 = loginButtonListener.userName1.getText();
+	    		username2 = loginButtonListener.userName2.getText();
 	        	MainGUI main = new MainGUI();
 	    		main.setVisible(true);
+	    	
 	        }
 		}
 	}

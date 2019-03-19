@@ -40,13 +40,6 @@ public class CheckersView implements GameView {
 	public void startGame() {
 		// TODO Auto-generated method stub
 		this.populateStartGrid();
-		/*ArrayList<int[]> testmove= new ArrayList<int[]>();
-		int[] move1 = new int[]{3,2};
-		testmove.add(move1);
-		
-		this.drawValidMove(testmove);*/ 
-		//test for draw valid move
-		
 	}
 
 	@Override

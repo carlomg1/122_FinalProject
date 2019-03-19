@@ -17,8 +17,8 @@ import com.sun.javafx.scene.paint.GradientUtils.Parser;
 
 public class UserJSON {
 //	JSONObject json;
-	JSONObject json = new JSONObject();  
-	JSONArray jsonArray;
+	static JSONObject json = new JSONObject();  
+	static JSONArray jsonArray;
 	JSONParser parser = new JSONParser();
 	Object object;
 	
@@ -69,10 +69,8 @@ public class UserJSON {
 				for(String key: userDict.keySet()) {
 					if(user1.equals(key)) {
 						usersToAdd.remove(user1);
-//						System.out.println("yepp1");
 					}else if(user2.equals(key)) {
 						usersToAdd.remove(user1);
-//						System.out.println("yepp2");
 					}
 				}
 				i++;
@@ -121,7 +119,35 @@ public class UserJSON {
 		}
 	}
 	
-	public void writeToFile(){
+	public static void incrementScore(String winner, String gameWon) {
+		System.out.println("IN INCREMENT SCORE");
+		System.out.println(jsonArray);
+		int i = 0;
+		for(Object user: jsonArray) {
+			HashMap<String, HashMap<String, Integer>> userDict = (HashMap<String, HashMap<String, Integer>>) jsonArray.get(i);
+			
+			for(String key: userDict.keySet()) {
+//				System.out.println("KEY: " + key + " || Winner: " + winner);
+				if(key.equals(winner)) {
+					System.out.println("KEY: " + key + " || Winner: " + winner);
+					HashMap<String, Integer> innerDict = (HashMap<String, Integer>) userDict.get(key);
+					for(String game: innerDict.keySet()) {
+						if(game.equals(gameWon)){
+							System.out.println(innerDict);
+							innerDict.put(gameWon, innerDict.get(gameWon) + 1);
+							System.out.println(key + " " + game + " " + innerDict.get(gameWon).toString());
+							writeToFile();
+							return;
+						}
+						
+					}	
+				}
+			}
+			i++;
+		}
+	}
+	
+	public static void writeToFile(){
 		// check if the names are already in the JSON file, if not write to it. 
 		// Make sure this does not overwrite the exisiting file & JSON
 		System.out.println("IN WRITE");
@@ -136,16 +162,11 @@ public class UserJSON {
 
 	}
 	
-	public void incrementScore(String user) {
-		System.out.println(jsonArray);
-	}
-	
-	public ArrayList<ArrayList<String>> jsonToArray() {
+	public static ArrayList<ArrayList<String>> jsonToArray() {
 		System.out.println("In JsonToArray");
 		ArrayList<ArrayList<String>> profiles = new ArrayList<ArrayList<String>>();
 		
 		int i = 0;
-		
 		for(Object user: jsonArray) {
 			HashMap<String, HashMap<String, Integer>> userDict = (HashMap<String, HashMap<String, Integer>>) jsonArray.get(i);
 			ArrayList<String> inner = new ArrayList<String>();
