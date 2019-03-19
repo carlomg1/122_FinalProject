@@ -24,9 +24,9 @@ public class CheckersGameState implements GameState{
 		
 		this.checkerLogic = new CheckersLogic();
 		
-		this.playerOneCount = 1; // change to 12
+		this.playerOneCount = 12; // change to 12
 				
-		this.playerTwoCount = 1; // change to 12
+		this.playerTwoCount = 12; // change to 12
 		
 		this.checkerBoard = new Checker[][]{
 			 { null, new Checker(1), null, new Checker(1), null, new Checker(1), null, new Checker(1) },
