@@ -1,9 +1,24 @@
 package logic;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.swing.*;
 
+import view.MainGUI;
+import view.UserJSON;
+
 public class CheckersLogic implements GameLogic {
+//	MainGUI mainGui = view.MainGUI;
+	private HashMap<Integer, String> userMap = new HashMap<Integer, String>();
+	
+	private static String GAME = "checkers";
+	
+	CheckersLogic(){
+		userMap.put(-1, MainGUI.username1);
+		userMap.put(1, MainGUI.username2);
+	}
 	
 	private int turn;
 	
@@ -83,20 +98,24 @@ public class CheckersLogic implements GameLogic {
 		return flipPieces;
 	}
 	
-	
 	public boolean checkValidMove(ArrayList<?> validMoves, GameState gstate){
 		return false;
 	}
 	
-	
 	public int findWinner(GameState gstate){
 		CheckersGameState checkerState = (CheckersGameState) gstate;
-		if (checkerState.playerOneCount == 0)
-			return -1;
-		else if (checkerState.playerTwoCount == 0)
-			return 1;
-		return 0;
-		
+		System.out.println("IN FIND WINNER");
+		System.out.println(checkerState.checkerLogic.userMap.get(-1));
+		System.out.println(checkerState.checkerLogic.userMap.get(1));
+		if (checkerState.playerOneCount == 0) {
+			UserJSON.incrementScore(checkerState.checkerLogic.userMap.get(1), GAME);
+			return -1;	
+		}
+		else if (checkerState.playerTwoCount == 0) {
+			UserJSON.incrementScore(checkerState.checkerLogic.userMap.get(-1), GAME);
+			return 1;	
+		}
+		return 0;	
 	}
 	public void changeTurn(){
 		
