@@ -54,7 +54,7 @@ public class OthelloView implements GameView {
 		jframe.setTitle("Othello");
 		jframe.setSize(1000,1000);
 		jframe.setLocationRelativeTo(null);
-		jframe.setDefaultCloseOperation(jframe.EXIT_ON_CLOSE);
+		jframe.setDefaultCloseOperation(jframe.DISPOSE_ON_CLOSE);
 		
 		//Initialize Button Array
 		numberButtons=64;
@@ -64,7 +64,7 @@ public class OthelloView implements GameView {
 		
 		//Scoreboard
 		score = new JLabel();
-		score.setFont(score.getFont ().deriveFont (50.0f));
+		score.setFont(score.getFont ().deriveFont (30.0f));
 	}
 
 	@Override

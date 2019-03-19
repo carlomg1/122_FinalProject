@@ -21,7 +21,7 @@ public class MainGUI extends JFrame {
 		
 		//Create buttons for each game
 		JButton checkersButton = addGameButton("Checkers", 70, new CheckersView());
-		JButton memoryButton = addGameButton("Memory", 150, new MemoryView("1", "2"));
+		JButton memoryButton = addGameButton("Memory", 150, new MemoryView(username1, username2));
 		JButton othelloButton = addGameButton("Othello", 230, new OthelloView());
 		JButton tictactoeButton = addGameButton("TicTacToe", 310, new TicTacToeView());
 		JButton leaderBoardButton = addLeaderButton("Leader Board View", 390);
@@ -78,8 +78,17 @@ public class MainGUI extends JFrame {
 	 * @param args
 	 */
 	public static void main (String[] args) {
+//<<<<<<< HEAD
 		loginButtonListener mainGui = new loginButtonListener();
 		method();
+//=======
+//		buttonListener12 again=new buttonListener12();
+//		again.method();
+//		//method();
+//		//Start the MainGUI
+//		MainGUI main = new MainGUI();
+//		main.setVisible(true);
+//>>>>>>> master
 	}
 	
 	public static class loginButtonListener extends JButton implements ActionListener{
@@ -98,6 +107,7 @@ public class MainGUI extends JFrame {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
+
 			String s = e.getActionCommand(); 
 	        if (s.equals("submit")) {
 	        	userJson.checkFile(userName1.getText(), userName2.getText());
@@ -106,7 +116,6 @@ public class MainGUI extends JFrame {
 	    		username2 = loginButtonListener.userName2.getText();
 	        	MainGUI main = new MainGUI();
 	    		main.setVisible(true);
-	    	
 	        }
 		}
 	}
