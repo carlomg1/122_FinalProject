@@ -94,14 +94,19 @@ public class MainGUI extends JFrame {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			 String s = e.getActionCommand(); 
-		        if (s.equals("submit")) {
-		        	userJson.checkFile(userName1.getText(), userName2.getText());
-		        	MainGUI main = new MainGUI();
-		    		main.setVisible(true);
-		        }
-			}
+			String s = e.getActionCommand(); 
+	        if (s.equals("submit")) {
+	        	userJson.checkFile(userName1.getText(), userName2.getText());
+	        	MainGUI main = new MainGUI();
+	    		main.setVisible(true);
+
+//		    		username1 = buttonListener12.t.getText();
+//		    		username2 = buttonListener12.t1.getText();
+
+	        }
+		}
 	}
+
 
 	public static void method() {
 
@@ -126,6 +131,5 @@ public class MainGUI extends JFrame {
 		buttonListener12.playerFrame.setSize(400, 400);
 		buttonListener12.playerFrame.show();
 	}
-
 }
 
