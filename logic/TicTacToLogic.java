@@ -96,7 +96,11 @@ public static class buttonListener extends JButton implements ActionListener
 
 
 	        public boolean checkDiagonalWin() {
+<<<<<<< HEAD
 	        	if (TicTacToLogic.isValidMove(0,4,tictactoGameState) && TicTacToLogic.isValidMove(4,8,tictactoGameState) || TicTacToLogic.isValidMove(2,4,tictactoGameState) && TicTacToLogic.isValidMove(4,6,tictactoGameState))
+=======
+	        	if (findWinner(0,4) && findWinner(4,8) || findWinner(2,4) && findWinner(4,6))
+>>>>>>> master
 	                return true;
 	            else {
 	                return false;
@@ -104,9 +108,15 @@ public static class buttonListener extends JButton implements ActionListener
 	        }
 
 	        public boolean checkVerticalWin(){
+<<<<<<< HEAD
 	        	if (TicTacToLogic.isValidMove(0,3,tictactoGameState) && TicTacToLogic.isValidMove(3,6,tictactoGameState)
 	        			|| TicTacToLogic.isValidMove(1,4,tictactoGameState) && TicTacToLogic.isValidMove(4,7,tictactoGameState)
 	        			|| TicTacToLogic.isValidMove(2,5,tictactoGameState) && TicTacToLogic.isValidMove(5,8,tictactoGameState)) {
+=======
+	        	if (findWinner(0,3) && findWinner(3,6)
+	        			|| findWinner(1,4) && findWinner(4,7)
+	        			|| findWinner(2,5) && findWinner(5,8)) {
+>>>>>>> master
 	        		 return true;
 	        	}
 
@@ -117,9 +127,15 @@ public static class buttonListener extends JButton implements ActionListener
 
 
 	        public boolean checkHorizontalWin() {
+<<<<<<< HEAD
 	        	if (TicTacToLogic.isValidMove(0,1,tictactoGameState) && TicTacToLogic.isValidMove(1,2,tictactoGameState)
 	        			|| TicTacToLogic.isValidMove(3,4,tictactoGameState) && TicTacToLogic.isValidMove(4,5,tictactoGameState)
 	        			|| TicTacToLogic.isValidMove(6,7,tictactoGameState) && TicTacToLogic.isValidMove(7,8,tictactoGameState)) {
+=======
+	        	if (findWinner(0,1) && findWinner(1,2)
+	        			|| findWinner(3,4) && findWinner(4,5)
+	        			|| findWinner(6,7) && findWinner(7,8)) {
+>>>>>>> master
 	        		 return true;
 	        	}
 	        	else {
@@ -127,7 +143,20 @@ public static class buttonListener extends JButton implements ActionListener
 	        }
 	        }
 
+<<<<<<< HEAD
 	        
+=======
+
+	        public boolean findWinner(int row,int column)
+	        {
+	            if (tictacview.buttons[row].getText().equals(tictacview.buttons[column].getText()) && !tictacview.buttons[row].getText().equals("")) {
+	                return true;
+	            }
+	            else
+	                return false;
+	        }
+
+>>>>>>> master
 	    }
 
 
@@ -155,6 +184,7 @@ public static class buttonListener extends JButton implements ActionListener
 		return tictacgame.validMoves;
 		
 
+<<<<<<< HEAD
 	} 
 	
 	public static boolean isValidMove(int row, int col, TicTacToGameState gameState){
@@ -180,4 +210,31 @@ public static class buttonListener extends JButton implements ActionListener
 		return false;
 	} // can take out later
 
+=======
+	@Override
+	public boolean checkValidMove(JButton button) {
+		buttonListener here=new buttonListener();
+
+		return false;
+	}
+	
+	public ArrayList<?> findValidMove(int row, int col, GameState gameState){
+		return null;
+	} // new added
+
+	public boolean isValidMove(int row, int col, GameState gameState){
+		return false;
+	} // new added
+	
+	
+	public boolean checkValidMove(ArrayList<?> validMoves, GameState gstate){
+		return false;
+	} // new added
+
+//	@Override
+//	public String getButtonClicked() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+>>>>>>> master
 }

@@ -32,6 +32,8 @@ public class TicTacToGameState implements GameState{
 		return validMoves;
 	}
 	
+
+			
 	public void update(){
 		
 	}//from interface
@@ -39,5 +41,6 @@ public class TicTacToGameState implements GameState{
 	public void update(int x, int y){
 		
 	}//from interface
-
+	public void changeTurn(){}
+	public void gameLoop(){}
 }

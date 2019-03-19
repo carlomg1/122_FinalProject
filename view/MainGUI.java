@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
 package view;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -6,11 +9,16 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 public class MainGUI extends JFrame {
+<<<<<<< HEAD
 
 public static String username1;
 public static String username2;
 
 
+=======
+	public static String username1;
+	public static String username2;
+>>>>>>> master
 
 	public MainGUI() {
 		//Set JPanel
@@ -33,10 +41,14 @@ public static String username2;
 		setTitle("Game Environment");
 		setSize(500,500);
 		setLocationRelativeTo(null);
+<<<<<<< HEAD
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
+=======
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+>>>>>>> master
 	}
 	private JButton addGameButton(String game, int y, GameView gameview) {
 		JButton checkersButton = new JButton(game);
@@ -94,8 +106,17 @@ public static String username2;
 		        if (s.equals("submit")) { 
 		        	MainGUI main = new MainGUI();
 		    		main.setVisible(true);
+<<<<<<< HEAD
 		    		username1=buttonListener12.t.getText();
 		    		username2=buttonListener12.t1.getText();
+=======
+
+		    		username1 = buttonListener12.t.getText();
+		    		username2 = buttonListener12.t1.getText();
+
+		        }
+		    		
+>>>>>>> master
 //		            // set the text of the label to the text of the field 
 //		            l.setText( buttonListener12.t.getText()); 
 //		  
@@ -103,33 +124,58 @@ public static String username2;
 //		            buttonListener12.t.setText("  "); 
 //			// TODO Auto-generated method stub
 //	
+<<<<<<< HEAD
 	}
 
 		}
+=======
+			}
+
+
+>>>>>>> master
 	public static void method() {
 
 		buttonListener12.f=new JFrame("Text");
 		buttonListener12.l=new JLabel("Player 1 Username:");
 		buttonListener12.l1=new JLabel("Player 2 Username:");
+<<<<<<< HEAD
+=======
+		//JLabel label1=new JLabel("Player 2 Username:");
+>>>>>>> master
 		buttonListener12.b=new JButton("submit");
 		buttonListener12 here =new buttonListener12();
 		buttonListener12.b.addActionListener(here);
 		buttonListener12.t=new JTextField(16);
 		buttonListener12.t1=new JTextField(16);
+<<<<<<< HEAD
+=======
+		//JTextField text1=new JTextField(16);
+>>>>>>> master
 		JPanel p=new JPanel();
 		p.add(buttonListener12.l);
 		p.add(buttonListener12.t);
 		p.add(buttonListener12.l1);
 		p.add(buttonListener12.t1);
 		p.add(buttonListener12.b);
+<<<<<<< HEAD
 
+=======
+		//p.add(label1);
+		//p.add(buttonListener12.l);
+		//p.add();
+>>>>>>> master
 
 		buttonListener12.f.add(p);
 		buttonListener12.f.setSize(400, 400);
 
 		buttonListener12.f.show();
+<<<<<<< HEAD
 		
 
+=======
+
+       // return text.getText();
+>>>>>>> master
 	}
 
 	/**
@@ -147,6 +193,12 @@ public static String username2;
 	 * @return a new JButton created
 	 */
 
+<<<<<<< HEAD
 	}
 }
 
+=======
+  }
+
+}
+>>>>>>> master
