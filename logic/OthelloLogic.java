@@ -10,7 +10,12 @@ import javax.swing.*;
 import view.MainGUI;
 
 public class OthelloLogic implements GameLogic {
-
+	HashMap<Integer,String> userMap = new HashMap<Integer, String>();
+	
+	public OthelloLogic(){
+		userMap.put(1, MainGUI.username1);
+		userMap.put(2, MainGUI.username2);
+	}
 	
 	public void initializeBoard(OthelloGameState gamestate) {
 		gamestate.board[3][3] = gamestate.black;
