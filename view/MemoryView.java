@@ -64,7 +64,7 @@ public class MemoryView implements GameView {
 		// TODO Auto-generated method stub
 		splitPane = new JSplitPane();
 		frame = new JFrame("Memory Match");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		panel = new JPanel();
 		panel.setLayout(new GridLayout(BOARD_ROWS, BOARD_COLS ));
