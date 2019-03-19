@@ -64,7 +64,7 @@ public class OthelloView implements GameView {
 		
 		//Scoreboard
 		score = new JLabel();
-		score.setFont(score.getFont ().deriveFont (50.0f));
+		score.setFont(score.getFont ().deriveFont (30.0f));
 	}
 
 	@Override
