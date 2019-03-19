@@ -32,7 +32,7 @@ public class MainGUI extends JFrame {
 
 		//Initialize environment
 		setTitle("Game Environment");
-		setSize(500,500);
+		setSize(500,600);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	
