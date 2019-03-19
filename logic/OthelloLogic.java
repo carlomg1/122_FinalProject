@@ -8,9 +8,12 @@ import java.util.Hashtable;
 import javax.swing.*;
 
 import view.MainGUI;
+import view.UserJSON;
 
 public class OthelloLogic implements GameLogic {
+	
 	HashMap<Integer,String> userMap = new HashMap<Integer, String>();
+	private static String GAME = "othello";
 	
 	public OthelloLogic(){
 		userMap.put(1, MainGUI.username1);
@@ -165,12 +168,15 @@ public class OthelloLogic implements GameLogic {
 	}
 	
 	public void findWinner(OthelloGameState gamestate) {
+		OthelloGameState othelloState = (OthelloGameState) gamestate;
 		if(gamestate.player1Total > gamestate.player2Total) {
+			UserJSON.incrementScore(othelloState.othelloLogic.userMap.get(1), GAME);
 			System.out.println("Black wins!");
 			gamestate.winner = gamestate.black;
 			gamestate.winnerString = "Black";
 		}
 		else if (gamestate.player2Total > gamestate.player1Total) {
+			UserJSON.incrementScore(othelloState.othelloLogic.userMap.get(2), GAME);
 			System.out.println("White wins!");
 			gamestate.winner = gamestate.black;
 			gamestate.winnerString = "White";
