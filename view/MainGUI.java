@@ -37,6 +37,7 @@ public class MainGUI extends JFrame {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	
 	}
+	
 	private JButton addLeaderButton(String name, int y) {
 		JButton leaderBoardButton = new JButton(name);
 		leaderBoardButton.setBounds(100, y, 300, 70);
@@ -74,11 +75,11 @@ public class MainGUI extends JFrame {
 	 * @param args
 	 */
 	public static void main (String[] args) {
-		buttonListener12 mainGui = new buttonListener12();
+		loginButtonListener mainGui = new loginButtonListener();
 		method();
 	}
 	
-	public static class buttonListener12 extends JButton implements ActionListener{
+	public static class loginButtonListener extends JButton implements ActionListener{
 		static JLabel player1; 
 		static JLabel player2;
 		static JTextField userName1; 
@@ -90,46 +91,43 @@ public class MainGUI extends JFrame {
 		// JButton 
 		static JButton submitButton; 
 		  
-		buttonListener12(){}
+		loginButtonListener(){}
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			String s = e.getActionCommand(); 
 	        if (s.equals("submit")) {
 	        	userJson.checkFile(userName1.getText(), userName2.getText());
+	        	userJson.jsonToArray();
 	        	MainGUI main = new MainGUI();
 	    		main.setVisible(true);
-
-//		    		username1 = buttonListener12.t.getText();
-//		    		username2 = buttonListener12.t1.getText();
-
 	        }
 		}
 	}
 
-
 	public static void method() {
 
-		buttonListener12.playerFrame = new JFrame("Text");
-		buttonListener12.player1 = new JLabel("Player 1 Username:");
-		buttonListener12.player2 = new JLabel("Player 2 Username:");
-		buttonListener12.submitButton = new JButton("submit");
-		buttonListener12 here = new buttonListener12();
-		buttonListener12.submitButton.addActionListener(here);
-		buttonListener12.userName1 = new JTextField(16);
-		buttonListener12.userName2 = new JTextField(16);
+		loginButtonListener.playerFrame = new JFrame("Text");
+		loginButtonListener.player1 = new JLabel("Player 1 Username:");
+		loginButtonListener.player2 = new JLabel("Player 2 Username:");
+		loginButtonListener.submitButton = new JButton("submit");
+		loginButtonListener here = new loginButtonListener();
+		loginButtonListener.submitButton.addActionListener(here);
+		loginButtonListener.userName1 = new JTextField(16);
+		loginButtonListener.userName2 = new JTextField(16);
 		
 		JPanel loginPanel = new JPanel();
 		
-		loginPanel.add(buttonListener12.player1);
-		loginPanel.add(buttonListener12.userName1);
-		loginPanel.add(buttonListener12.player2);
-		loginPanel.add(buttonListener12.userName2);
-		loginPanel.add(buttonListener12.submitButton);
+		loginPanel.add(loginButtonListener.player1);
+		loginPanel.add(loginButtonListener.userName1);
+		loginPanel.add(loginButtonListener.player2);
+		loginPanel.add(loginButtonListener.userName2);
+		loginPanel.add(loginButtonListener.submitButton);
 
-		buttonListener12.playerFrame.add(loginPanel);
-		buttonListener12.playerFrame.setSize(400, 400);
-		buttonListener12.playerFrame.show();
+		loginButtonListener.playerFrame.add(loginPanel);
+		loginButtonListener.playerFrame.setSize(400, 400);
+		loginButtonListener.playerFrame.show();
 	}
+
 }
 
